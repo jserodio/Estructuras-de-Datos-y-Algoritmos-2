@@ -44,8 +44,11 @@ public class Datos {
 					// g[1] ⬅️  "O'Toole, Peter (I)"
 					String g[] = f[1].split(" &&& ");
 					
-					// Imprimir actores
-					System.out.println("Actor: " + g[0]);	
+					for (String item : g) {
+						// Imprimir actores
+						System.out.println("Actor: " + item);
+					}
+						
 				}
 			}
 			input.close();
