@@ -1,11 +1,16 @@
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Datos {
 	public Datos () {	}
 	
 	public void cargarDatos (String ruta) {
+		
+		// HashMap < Key , Value > == < nombreActor : String , listaActores : ArrayList(string) >
+		HashMap<String, ArrayList<String>>  hashList = new HashMap<String, ArrayList<String>>();
 		
 		try {
 		
