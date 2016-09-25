@@ -8,9 +8,7 @@ public class Main {
 		
 		System.out.println(timer.elapsedTime() + " seconds.");
 		
-		Datos datos = new Datos();
-		
-		datos.cargarDatos("FilmsActors20162017.txt");
+		SinglePeliculas.getSingle().cargarDatos("FilmsActors20162017.txt");
 		
 		System.out.println(timer.elapsedTime() + " seconds.");
 	}

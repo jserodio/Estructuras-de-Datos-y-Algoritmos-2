@@ -1,16 +1,29 @@
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
-public class Datos {
-	public Datos () {	}
+public class SinglePeliculas {
+	
+	// start-singleton-pattern
+	// lazy-initialization
+	private static SinglePeliculas miSinglePeliculas = null;
+	
+	private SinglePeliculas() {}
+	
+	public static SinglePeliculas getSingle() {
+		
+		if (miSinglePeliculas == null) {
+			miSinglePeliculas = new SinglePeliculas();
+		}
+		
+		return miSinglePeliculas;
+	}
+	// fin-singleton-pattern
 	
 	public void cargarDatos (String ruta) {
 		
 		// HashMap < Key , Value > == < nombreActor : String , listaActores : ArrayList(string) >
-		HashMap<String, ArrayList<String>>  hashList = new HashMap<String, ArrayList<String>>();
+		//HashMap<String, ArrayList<String>>  hashList = new HashMap<String, ArrayList<String>>();
 		
 		try {
 		
@@ -69,4 +82,10 @@ public class Datos {
 		}
 			
 	}
+
+
+	public void guardarDatos (String ruta) {
+		// guardar
+	}
+	
 }
