@@ -1,5 +1,8 @@
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class SinglePeliculas {
@@ -20,10 +23,15 @@ public class SinglePeliculas {
 	}
 	// fin-singleton-pattern
 	
+	private ArrayList<Pelicula> lista = new ArrayList<Pelicula>();
+	
+	public void insertarPelicula (Pelicula pelicula) {
+		lista.add(pelicula);
+	}
+	
 	public void cargarDatos (String ruta) {
 		
-		// HashMap < Key , Value > == < nombreActor : String , listaActores : ArrayList(string) >
-		//HashMap<String, ArrayList<String>>  hashList = new HashMap<String, ArrayList<String>>();
+		HashSet<String>  listaHash = new HashSet<String>();
 		
 		try {
 		
@@ -53,6 +61,10 @@ public class SinglePeliculas {
 				// Imprimir pelicula
 				System.out.println("Pelicula: " + f[0]);
 				
+				// Instanciar el objeto pelicula e insertarlo a la lista
+				Pelicula peli = new Pelicula(f[0]);				
+				SinglePeliculas.getSingle().insertarPelicula(peli);
+				
 				if(f.length>1){
 					// Dividir f[1] en un array g[] con diferentes posiciones
 					// Antes de dividir:
@@ -62,12 +74,24 @@ public class SinglePeliculas {
 					// g[1] ⬅️  "O'Toole, Peter (I)"
 					String g[] = f[1].split(" &&& ");
 					
+					// Por cada actor.
 					for (String item : g) {
-						// Imprimir actores
-						System.out.println("Actor: " + item);
+						
+						// Si el actor no esta en la listaHash
+						if (listaHash.contains(item) == false) {
+							listaHash.add(item);
+							// Crear objeto actor e insertarlo en la Lista completa.
+							Actor actor = new Actor(item);							
+							SingleActores.getSingle().insertarActor(actor);
+							System.out.println("Actor: " + item);
+						} else {
+	
+							System.out.println("# Actor repetido: " + item);
+						}						
 					}
 						
 				}
+				System.out.println("");
 			}
 			input.close();
 			
