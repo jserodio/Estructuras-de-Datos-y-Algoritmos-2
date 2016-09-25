@@ -3,10 +3,15 @@ public class Main {
 	public static void main(String[] args) {
 
 		System.out.println("Cargando datos del fichero: ");
+
+		Stopwatch timer = new Stopwatch();
 		
-		Datos datos = new Datos();
+		System.out.println(timer.elapsedTime() + " seconds.");
 		
-		datos.cargarDatos("FilmsActors20162017.txt");
+		SinglePeliculas.getSingle().cargarDatos("FilmsActors20162017.txt");
+		
+		System.out.println(timer.elapsedTime() + " seconds.");
+
 	}
 
 }
