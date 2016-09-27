@@ -1,16 +1,21 @@
 import java.util.ArrayList;
 
 public class Pelicula {
-	
+
+	private final String		nombre;
+
+	private ArrayList<Actor>	listaActores;
+	private float				dinero;
+
 	public Pelicula(String p) {
 		this.nombre = p;
 	}
-	
-	private String nombre;
-	private ArrayList<Actor> listaActores;
-	private float dinero;
-	
+
+	public String getNombre() {
+		return nombre;
+	}
+
 	public void insertarDinero(float cantidad) {
-		// insertar
+		this.dinero = cantidad;
 	}
 }
