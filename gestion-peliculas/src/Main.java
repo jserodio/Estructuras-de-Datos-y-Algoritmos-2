@@ -29,6 +29,12 @@ public class Main {
 
 			System.out.println(timer.elapsedTime() + " seconds.");
 			break;
+		case "buscar":
+			while (Main.teclado.hasNextLine()) {
+				String nActor;// print the contents of a file by line
+				nActor = Main.teclado.nextLine();
+				SingleActores.getSingle().buscarActor(nActor);
+			}
 		}
 	}
 }
