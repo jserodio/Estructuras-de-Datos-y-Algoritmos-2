@@ -1,3 +1,4 @@
+package packCodigo;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -40,9 +41,9 @@ public class SinglePeliculas {
 			Scanner input = null;
 			input = new Scanner(new FileReader(ruta));
 			String linea;
-
-			System.out.println("\nCargando...");
-
+			
+			System.out.println("Cargando archivo, espere por favor.");
+			
 			while (input.hasNext()) {
 
 				// Leemos linea
@@ -61,7 +62,7 @@ public class SinglePeliculas {
 				String f[] = linea.split(" ---> ");
 
 				// Imprimir pelicula
-				System.out.println("Pelicula: " + f[0]);
+				// System.out.println("Pelicula: " + f[0]);
 
 				// Instanciar el objeto pelicula e insertarlo a la lista
 				Pelicula peli = new Pelicula(f[0]);
@@ -86,19 +87,17 @@ public class SinglePeliculas {
 							// completa.
 							Actor actor = new Actor(item);
 							SingleActores.getSingle().insertarActor(actor);
-							System.out.println("Actor: " + item);
+							// System.out.println("Actor: " + item);
 						} else {
-
-							System.out.println("# Actor repetido: " + item);
+							// System.out.println("# Actor repetido: " + item);
 						}
 					}
 
 				}
-				System.out.println("");
 			}
 			input.close();
 
-			System.out.println("El archivo ha sido cargado." + '\n');
+			System.out.println("El archivo ha sido cargado.");
 
 			// return algo;
 
@@ -116,6 +115,10 @@ public class SinglePeliculas {
 
 	public void insertarPelicula(Pelicula pelicula) {
 		lista.add(pelicula);
+	}
+	
+	public ArrayList<Pelicula> getLista() {
+		return lista;
 	}
 
 }

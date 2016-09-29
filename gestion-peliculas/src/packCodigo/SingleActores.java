@@ -1,3 +1,4 @@
+package packCodigo;
 import java.util.ArrayList;
 
 public class SingleActores {
@@ -65,6 +66,10 @@ public class SingleActores {
 
 	public void ordenar() {
 		// ordenar
+	}
+
+	public ArrayList<Actor> getLista() {
+		return lista;
 	}
 
 }
