@@ -27,15 +27,22 @@ public class SingleActores {
 	 */
 	private final ArrayList<Actor>	lista			= new ArrayList<Actor>();
 	
+	/**
+	 * Mira si está el actor en la lista.
+	 * 
+	 * @param nombre
+	 * @return	Devuelve TRUE si encuentra el actor, si no FALSE.
+	 */
 	public boolean estaActor(String nombre) {
-		if (lista.indexOf(nombre) >= 0) {
-			return true;
-		} else {
-			return false;
-		}
+		return lista.contains(nombre);
 	}
 	
-	// interface pattern
+	/**
+	 * Busca el actor y devuelve su posición.
+	 * 
+	 * @param nombre
+	 * @return Devuelve la POSICIÓN donde se encuentra el actor.
+	 */
 	public int buscarActor(String nombre) {
 		return lista.indexOf(nombre);
 	}
@@ -53,7 +60,7 @@ public class SingleActores {
 	}
 
 	public boolean insertarActor(Actor actor) {
-		if (this.buscarActor( actor.getNombre() )) {
+		if (this.estaActor( actor.getNombre() )) {
 			return false;
 		} else {		
 			lista.add(actor);
