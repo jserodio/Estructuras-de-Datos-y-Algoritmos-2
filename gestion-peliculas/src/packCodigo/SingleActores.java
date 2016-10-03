@@ -27,41 +27,39 @@ public class SingleActores {
 	 */
 	private final ArrayList<Actor>	lista			= new ArrayList<Actor>();
 	
-	public void buscarActor(String nombre) {
-		if (lista.contains(nombre) == true) {
-			for (int i = 0; i < lista.size(); i++) {
-				if (lista.get(i).getNombre() == nombre) {// Busca el nombre en
-					// la
-					// lista
-					System.out.println("Nombre:" + nombre);// Imprime por
-					// pantalla
-					// la info
-					System.out.println("Peliculas:");
-					for (int j = 0; i < lista.get(i).getListaPeliculas().size(); j++) {
-						System.out.println('\n' + lista.get(i)
-								.getListaPeliculas().get(j).getNombre());
-					}
-				}
-			}
+	public boolean estaActor(String nombre) {
+		if (lista.indexOf(nombre) >= 0) {
+			return true;
 		} else {
-			System.out.println("No se ha encontrado al actor o actriz");
+			return false;
+		}
+	}
+	
+	// interface pattern
+	public int buscarActor(String nombre) {
+		return lista.indexOf(nombre);
+	}
+	
+	public void imprimir() {
+		for (Actor actor : lista) {
+			System.out.println("\n" + actor.getNombre());
 		}
 	}
 
 	public void eliminarActor(String nombre) {
-		if (lista.contains(nombre) == true) {
-			for (int i = 0; i < lista.size(); i++) {
-				if (lista.get(i).getNombre() == nombre) {
-					lista.remove(i);
-				}
-			}
-		} else {
-			System.out.println("No se ha encontrado al actor o actriz");
+		if (this.estaActor(nombre)) {
+			lista.remove(this.buscarActor(nombre)); 
 		}
 	}
 
-	public void insertarActor(Actor actor) {
-		lista.add(actor);
+	public boolean insertarActor(Actor actor) {
+		if (this.buscarActor( actor.getNombre() )) {
+			return false;
+		} else {		
+			lista.add(actor);
+			return true;
+		}
+		
 	}
 
 	public void ordenar() {

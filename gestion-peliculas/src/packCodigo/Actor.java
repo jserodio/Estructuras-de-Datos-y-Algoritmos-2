@@ -18,5 +18,11 @@ public class Actor {
 	public String getNombre() {
 		return nombre;
 	}
+	
+	public void imprimir() {
+		for (Pelicula pelicula : listaPeliculas) {
+			System.out.println("\n" + pelicula.getNombre());
+		}
+	}
 
 }
