@@ -1,7 +1,8 @@
 package packCodigo;
+
 import java.util.ArrayList;
 
-public class Actor {
+public class Actor implements Comparable<Actor> {
 
 	private final String		nombre;
 
@@ -9,6 +10,11 @@ public class Actor {
 
 	public Actor(String a) {
 		this.nombre = a;
+	}
+
+	@Override
+	public int compareTo(Actor o) {
+		return nombre.compareTo(o.getNombre());
 	}
 
 	public ArrayList<Pelicula> getListaPeliculas() {

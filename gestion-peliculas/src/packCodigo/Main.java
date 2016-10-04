@@ -34,6 +34,9 @@ public class Main {
 			case "salir":
 				System.out.println("saliendo");
 				break;
+			case "ordenar":
+				SingleActores.getSingle().ordenar();
+				break;
 			default:
 				System.out.println("Comando incorrecto.");
 				break;

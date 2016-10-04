@@ -1,44 +1,40 @@
 package packCodigo;
+
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class SingleActores {
 
 	// start-singleton-pattern
 	// lazy-initialization
-	private static SingleActores	miSingleActores	= null;
+	private static SingleActores			miSingleActores	= null;
+
+	/**
+	 *
+	 * CODIGO DE SINGLEACTORES
+	 *
+	 */
+	private final static ArrayList<Actor>	lista			= new ArrayList<Actor>();
 
 	private SingleActores() {
 	}
 
-	public static SingleActores getSingle() {
-
-		if (SingleActores.miSingleActores == null) {
-			SingleActores.miSingleActores = new SingleActores();
-		}
-
-		return SingleActores.miSingleActores;
-	}
-	// fin-singleton-pattern
-	
-	/**
-	 * 
-	 * CODIGO DE SINGLEACTORES
-	 * 
-	 */
-	private final ArrayList<Actor>	lista			= new ArrayList<Actor>();
-	
 	public void buscarActor(String nombre) {
-		if (lista.contains(nombre) == true) {
-			for (int i = 0; i < lista.size(); i++) {
-				if (lista.get(i).getNombre() == nombre) {// Busca el nombre en
+		if (SingleActores.lista.contains(nombre) == true) {
+			for (int i = 0; i < SingleActores.lista.size(); i++) {
+				if (SingleActores.lista.get(i).getNombre() == nombre) {// Busca
+																		// el
+																		// nombre
+																		// en
 					// la
 					// lista
 					System.out.println("Nombre:" + nombre);// Imprime por
 					// pantalla
 					// la info
 					System.out.println("Peliculas:");
-					for (int j = 0; i < lista.get(i).getListaPeliculas().size(); j++) {
-						System.out.println('\n' + lista.get(i)
+					for (int j = 0; i < SingleActores.lista.get(i)
+							.getListaPeliculas().size(); j++) {
+						System.out.println('\n' + SingleActores.lista.get(i)
 								.getListaPeliculas().get(j).getNombre());
 					}
 				}
@@ -49,10 +45,10 @@ public class SingleActores {
 	}
 
 	public void eliminarActor(String nombre) {
-		if (lista.contains(nombre) == true) {
-			for (int i = 0; i < lista.size(); i++) {
-				if (lista.get(i).getNombre() == nombre) {
-					lista.remove(i);
+		if (SingleActores.lista.contains(nombre) == true) {
+			for (int i = 0; i < SingleActores.lista.size(); i++) {
+				if (SingleActores.lista.get(i).getNombre() == nombre) {
+					SingleActores.lista.remove(i);
 				}
 			}
 		} else {
@@ -60,16 +56,27 @@ public class SingleActores {
 		}
 	}
 
-	public void insertarActor(Actor actor) {
-		lista.add(actor);
-	}
-
-	public void ordenar() {
-		// ordenar
-	}
-
 	public ArrayList<Actor> getLista() {
-		return lista;
+		return SingleActores.lista;
+	}
+
+	public void insertarActor(Actor actor) {
+		SingleActores.lista.add(actor);
+	}
+
+	public static SingleActores getSingle() {
+
+		if (SingleActores.miSingleActores == null) {
+			SingleActores.miSingleActores = new SingleActores();
+		}
+
+		return SingleActores.miSingleActores;
+	}
+
+	// fin-singleton-pattern
+
+	public static void ordenar() {
+		Collections.sort(SingleActores.lista);
 	}
 
 }
