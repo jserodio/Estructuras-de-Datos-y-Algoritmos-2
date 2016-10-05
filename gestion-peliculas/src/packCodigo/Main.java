@@ -1,4 +1,5 @@
 package packCodigo;
+
 import java.util.Scanner;
 
 public class Main {
@@ -10,7 +11,7 @@ public class Main {
 		// mientras elegido != salir no se cerrara el programa
 		do {
 			System.out
-			.println("Escriba cual de las siguientes tareas desea realizar: ");
+					.println("Escriba cual de las siguientes tareas desea realizar: ");
 			System.out.println(" cargar");
 			System.out.println(" leer");
 			System.out.println(" buscar");
@@ -20,11 +21,12 @@ public class Main {
 			System.out.println();
 			switch (elegido) {
 			case "leer":
-				System.out.println("leyendo");
+				SingleActores.getSingle().getLista();
 				break;
 			case "cargar":
 				Stopwatch timer = new Stopwatch();
-				SinglePeliculas.getSingle().cargarDatos("ficheros/FilmsActors20162017.txt");
+				SinglePeliculas.getSingle().cargarDatos(
+						"ficheros/FilmsActors20162017.txt");
 				System.out.println(timer.elapsedTime() + " segundos.\n");
 				break;
 			case "buscar":
@@ -35,12 +37,14 @@ public class Main {
 				System.out.println("saliendo");
 				break;
 			case "ordenar":
-				SingleActores.getSingle().ordenar();
+				Stopwatch timer2 = new Stopwatch();
+				SingleActores.ordenar();
+				System.out.println(timer2.elapsedTime() + " segundos.\n");
 				break;
 			default:
 				System.out.println("Comando incorrecto.");
 				break;
-			} // fin switch			
+			} // fin switch
 		} while (!elegido.equals("salir"));
 		in.close();
 	}

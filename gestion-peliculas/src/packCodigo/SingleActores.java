@@ -7,14 +7,14 @@ public class SingleActores {
 
 	// start-singleton-pattern
 	// lazy-initialization
-	private static SingleActores			miSingleActores	= null;
+	private static SingleActores	miSingleActores	= null;
 
 	/**
 	 *
 	 * CODIGO DE SINGLEACTORES
 	 *
 	 */
-	private final static ArrayList<Actor>	lista			= new ArrayList<Actor>();
+	final static ArrayList<Actor>	lista			= new ArrayList<Actor>();
 
 	private SingleActores() {
 	}
@@ -23,9 +23,9 @@ public class SingleActores {
 		if (SingleActores.lista.contains(nombre) == true) {
 			for (int i = 0; i < SingleActores.lista.size(); i++) {
 				if (SingleActores.lista.get(i).getNombre() == nombre) {// Busca
-																		// el
-																		// nombre
-																		// en
+					// el
+					// nombre
+					// en
 					// la
 					// lista
 					System.out.println("Nombre:" + nombre);// Imprime por
@@ -76,7 +76,8 @@ public class SingleActores {
 	// fin-singleton-pattern
 
 	public static void ordenar() {
-		Collections.sort(SingleActores.lista);
+		Collections.sort(SingleActores.getSingle().getLista());
+
 	}
 
 }
