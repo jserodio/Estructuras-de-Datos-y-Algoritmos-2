@@ -7,7 +7,6 @@ public class Main {
 	public static void main(String[] args) {
 
 		String elegido;
-		Stopwatch timer;
 		Scanner in = new Scanner(System.in);
 		// mientras elegido != salir no se cerrara el programa
 		do {
@@ -25,7 +24,7 @@ public class Main {
 				SingleActores.getSingle().imprimir();
 				break;
 			case "cargar":
-				timer = new Stopwatch();
+				Stopwatch timer = new Stopwatch();
 				SinglePeliculas.getSingle().cargarDatos(
 						"ficheros/FilmsActors20162017.txt");
 				System.out.println(timer.elapsedTime() + " segundos.\n");

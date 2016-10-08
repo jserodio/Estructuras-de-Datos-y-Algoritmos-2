@@ -61,6 +61,7 @@ public class SingleActores {
 		// for (Actor actor : lista) {
 			// System.out.println("\n" + actor.getNombre());
 		// }
+		System.out.println("Se han listado " + lista.size() + " actores.");
 	}
 
 	/**
