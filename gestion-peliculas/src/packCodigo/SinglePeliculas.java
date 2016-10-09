@@ -2,7 +2,9 @@ package packCodigo;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Scanner;
 
 public class SinglePeliculas {
@@ -33,7 +35,7 @@ public class SinglePeliculas {
 	
 	public void cargarDatos(String ruta) {
 
-		HashSet<String> listaHash = new HashSet<String>();
+		Map<String, Actor> listaHash = new HashMap<String, Actor>();
 
 		try {
 
@@ -79,18 +81,28 @@ public class SinglePeliculas {
 
 					// Por cada actor.
 					for (String item : g) {
-
+						
+						// Actor actor = new Actor(item);
 						// Si el actor no esta en la listaHash
-						if (listaHash.contains(item) == false) {
-							listaHash.add(item);
-							// Crear objeto actor e insertarlo en la Lista
-							// completa.
+						if (listaHash.containsKey(item) == false) {
+							
 							Actor actor = new Actor(item);
+							listaHash.put(item, actor);
+							
 							SingleActores.getSingle().insertarActor(actor);
 							// System.out.println("Actor: " + item);
-						} else {
-							// System.out.println("# Actor repetido: " + item);
+							
 						}
+						
+						// Insertar actor concreto en la lista de la pelicula concreta.
+						// Si el actor es nuevo, se inserta en la lista HashMap
+						// Si no es un actor nuevo, igualmente estaba en la lista
+						// Pase lo que pase, se obtiene el objeto Actor previamente creado
+						Actor actor = listaHash.get(item);
+						peli.insertarActor(actor);
+						
+						// Para este actor, sea uno nuevo, o antiguo, insertamos su peli
+						actor.insertarPelicula(peli);
 					}
 
 				}
@@ -119,6 +131,27 @@ public class SinglePeliculas {
 	
 	public ArrayList<Pelicula> getLista() {
 		return lista;
+	}
+
+	/**
+	 * Imprime la lista de peliculas
+	 */
+	public void imprimir() {
+		System.out.print("\n");
+		lista.stream().map(Pelicula::getNombre).forEach(nombrePelicula -> System.out.println("-" + nombrePelicula));
+		System.out.print("\n");
+		System.out.println("Se han listado " + lista.size() + " peliculas.\n");
+	}
+
+	/**
+	 * Busca la pelicula y devuelve su posición.
+	 * 
+	 * @param nombre
+	 * @return Devuelve la POSICIÓN donde se encuentra la pelicula.
+	 * 		   Si no encuentra la pelicula devuelve -1.
+	 */
+	public int buscarPelicula(Pelicula pelicula) {
+		return lista.indexOf(pelicula);
 	}
 
 }

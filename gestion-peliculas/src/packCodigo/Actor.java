@@ -10,6 +10,7 @@ public class Actor implements Comparable<Actor> {
 
 	public Actor(String a) {
 		this.nombre = a;
+		this.listaPeliculas = new ArrayList<Pelicula>();
 	}
 
 	@Override
@@ -29,6 +30,10 @@ public class Actor implements Comparable<Actor> {
 		for (Pelicula pelicula : listaPeliculas) {
 			System.out.println("\n" + pelicula.getNombre());
 		}
+	}
+	
+	public void insertarPelicula(Pelicula peli) {
+		listaPeliculas.add(peli);
 	}
 
 	@Override

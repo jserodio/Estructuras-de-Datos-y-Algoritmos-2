@@ -1,7 +1,6 @@
 package packCodigo;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class SingleActores {
 
@@ -58,12 +57,14 @@ public class SingleActores {
 		// Java 8
 		// lista.stream().forEach(actor -> System.out.println('\n' + actor.getNombre()));
 		// otra forma en Java 8.
-		lista.stream().map(Actor::getNombre).forEach(nombreActor -> System.out.println('\n' + nombreActor));
+		System.out.print("\n");
+		lista.stream().map(Actor::getNombre).forEach(nombreActor -> System.out.println("-" + nombreActor));
 		// Java moderno
 		// for (Actor actor : lista) {
 			// System.out.println("\n" + actor.getNombre());
 		// }
-		System.out.println("Se han listado " + lista.size() + " actores.");
+		System.out.print("\n");
+		System.out.println("Se han listado " + lista.size() + " actores.\n");
 	}
 
 	/**
@@ -109,7 +110,7 @@ public class SingleActores {
 		return nombresOrdenados;
 	}
 
-	 private String[] quickSort(int lowerIndex, int higherIndex) {
+	private String[] quickSort(int lowerIndex, int higherIndex) {
 	     int i = lowerIndex;
 	     int j = higherIndex;
 	     String temp;

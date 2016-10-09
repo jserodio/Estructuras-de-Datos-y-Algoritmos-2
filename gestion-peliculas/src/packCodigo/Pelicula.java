@@ -10,6 +10,7 @@ public class Pelicula {
 
 	public Pelicula(String p) {
 		this.nombre = p;
+		this.listaActores = new ArrayList<Actor>();
 	}
 
 	public String getNombre() {
@@ -18,5 +19,9 @@ public class Pelicula {
 
 	public void insertarDinero(float cantidad) {
 		this.dinero = cantidad;
+	}
+
+	public void insertarActor(Actor actor) {
+		listaActores.add(actor);
 	}
 }
