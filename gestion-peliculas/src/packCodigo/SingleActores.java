@@ -27,7 +27,8 @@ public class SingleActores {
 	 * CODIGO DE SINGLEACTORES
 	 * 
 	 */
-	private final ArrayList<Actor>	lista			= new ArrayList<Actor>();
+	private final ArrayList<Actor> lista = new ArrayList<Actor>();
+	private String[] nombresOrdenados;
 	
 	/**
 	 * Mira si está el actor en la lista.
@@ -35,8 +36,8 @@ public class SingleActores {
 	 * @param nombre
 	 * @return	Devuelve TRUE si encuentra el actor, si no FALSE.
 	 */
-	public boolean estaActor(String nombre) {
-		return lista.contains(nombre);
+	public boolean estaActor(Actor actor) {
+		return lista.contains(actor);
 	}
 	
 	/**
@@ -44,9 +45,10 @@ public class SingleActores {
 	 * 
 	 * @param nombre
 	 * @return Devuelve la POSICIÓN donde se encuentra el actor.
+	 * 		   Si no encuentra el actor devuelve -1.
 	 */
-	public int buscarActor(String nombre) {
-		return lista.indexOf(nombre);
+	public int buscarActor(Actor actor) {
+		return lista.indexOf(actor);
 	}
 	
 	/**
@@ -65,35 +67,26 @@ public class SingleActores {
 	}
 
 	/**
-	 * Elimina un actor dado su nombre.
+	 * Elimina un actor.
 	 * 
 	 * @param nombre
 	 * @return Devuelve el objeto Actor eliminado. En caso de no eliminarlo devuelve null.
 	 */
-	public Actor eliminarActor(String nombre) {
-		if (this.estaActor(nombre)) {
-			return lista.remove(this.buscarActor(nombre));
+	public Actor eliminarActor(Actor actor) {
+		if (this.estaActor(actor)) {
+			return lista.remove(this.buscarActor(actor));
 		} else {
 			return null;
 		}
 	}
 
 	/**
-	 * Inserta un actor nuevo pasandole una instancia de Actor.
-	 * Ej: Actor a = new Actor();
-	 *     if (insertarActor(a)) {
-	 *     	 // actor insertado
-	 *     }
+	 * Inserta un actor.
 	 * @param actor
 	 * @return TRUE si lo inserta correctamente, si no FALSE.
 	 */
-	public boolean insertarActor(Actor actor) {
-		if (this.estaActor( actor.getNombre() )) {
-			return false;
-		} else {		
-			return lista.add(actor);
-		}
-		
+	public boolean insertarActor(Actor actor) {		
+		return lista.add(actor);
 	}
 
 	/**
@@ -101,51 +94,53 @@ public class SingleActores {
 	 * 
 	 * @return ArrayList<Actor> ordenado
 	 */
-	public ArrayList<Actor> ordenar() {
-		ArrayList<Actor> listaOrdenada = new ArrayList<Actor>();
+	public String[] ordenar() {
 		
 		// si lista esta vacia
-        if (lista.equals(null) || lista.size()==0){
-        	// algoritmo de quickSort
-        	String[] nombres = (String[]) lista.stream().map(Actor::getNombre).toArray();
-        	String[] nombresOrdenados = quickSort( nombres, 0, lista.size() - 1);
-        }	
+        if (lista.equals(null) || lista.size()==0) {
+        	nombresOrdenados = null;
+        } else {
+	    	// array de strings con tamano original de la lista
+	    	nombresOrdenados = lista.stream().map(Actor::getNombre).toArray(String[]::new);
+    		// algoritmo de quickSort
+        	nombresOrdenados = quickSort(0, lista.size() - 1);
+        }
 		
-		return listaOrdenada;
+		return nombresOrdenados;
 	}
 
-	 private String[] quickSort(String[] nombres, int lowerIndex, int higherIndex) {
+	 private String[] quickSort(int lowerIndex, int higherIndex) {
 	     int i = lowerIndex;
 	     int j = higherIndex;
 	     String temp;
-	     String pivot = nombres[lowerIndex + (higherIndex - lowerIndex) / 2];
+	     String pivot = nombresOrdenados[lowerIndex + (higherIndex - lowerIndex) / 2];
 	
 	     while (i <= j) {
-	         while (nombres[i].compareToIgnoreCase(pivot) < 0) {
+	         while (nombresOrdenados[i].compareToIgnoreCase(pivot) < 0) {
 	             i++;
 	         }
 	
-	         while (nombres[j].compareToIgnoreCase(pivot) > 0) {
+	         while (nombresOrdenados[j].compareToIgnoreCase(pivot) > 0) {
 	             j--;
 	         }
 	
 	         if (i <= j) {
 	        	 // itercambiar
-	    	     temp = nombres[i];
-	    	     nombres[i] = nombres[j];
-	    	     nombres[j] = temp;
+	    	     temp = nombresOrdenados[i];
+	    	     nombresOrdenados[i] = nombresOrdenados[j];
+	    	     nombresOrdenados[j] = temp;
 	             i++;
 	             j--;
 	         }
 	     }
 	     //call quickSort recursively
 	     if (lowerIndex < j) {
-	    	 quickSort(nombres, lowerIndex, j);
+	    	 quickSort(lowerIndex, j);
 	     }
 	     if (i < higherIndex) {
-	         quickSort(nombres, i, higherIndex);
+	         quickSort(i, higherIndex);
 	     }
-	     return nombres;
+	     return nombresOrdenados;
 	 }
 
 	public ArrayList<Actor> getLista() {
