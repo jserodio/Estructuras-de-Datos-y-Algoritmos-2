@@ -242,7 +242,7 @@ public class Main {
 				nActor = in.nextLine();
 				timer = new Stopwatch();
 				actor = new Actor(nActor);
-				try { // intenta buscar el actor en la lista, si no lo encuentra, crea uno nuevo y lo añade a la lista de actores.
+				try { // intenta buscar el actor en la lista
 					actor = SingleActores.getSingle().getLista().get(SingleActores.getSingle().buscarActor(actor)); // obtener objeto original
 				} catch (IndexOutOfBoundsException e) {
 					System.out.println("Error.");
@@ -260,7 +260,23 @@ public class Main {
 				}
 				break;
 			case "incrementar dinero":
-				System.out.println("Sin implementar aun.");
+				System.out.println("Escriba el nombre de la pelicula: ");
+				System.out.print("> ");
+				nPelicula = in.nextLine();
+				pelicula = new Pelicula(nPelicula);
+				try { // intenta buscar al pelicula en la lista
+					pelicula = SinglePeliculas.getSingle().getLista().get(SinglePeliculas.getSingle().buscarPelicula(pelicula));
+					System.out.println("\nPresupuesto inicial: " + pelicula.getDinero());
+					System.out.println("Cantidad a donar: ");
+					System.out.print("> ");
+					float cant = in.nextFloat();
+					in.nextLine(); // para limpiar buffer
+					pelicula.insertarDinero(cant);
+					System.out.println("Presupuesto final: " + pelicula.getDinero());
+				} catch (IndexOutOfBoundsException e) {
+					System.out.println("Error, la pelicula no existe.");
+				}
+				System.out.print("\n");
 				break;
 			case "guardar":
 				System.out.println("Sin implementar aun.");

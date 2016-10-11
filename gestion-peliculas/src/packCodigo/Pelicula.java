@@ -31,7 +31,7 @@ public class Pelicula {
 	}
 	
 	public void insertarDinero(float cantidad) {
-		this.dinero =+ cantidad;
+		this.dinero = this.dinero + cantidad;
 	}
 	
 	public void imprimir() {
