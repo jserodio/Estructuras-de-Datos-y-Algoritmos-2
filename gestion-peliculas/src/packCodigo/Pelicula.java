@@ -11,18 +11,30 @@ public class Pelicula {
 	public Pelicula(String p) {
 		this.nombre = p;
 		this.listaActores = new ArrayList<Actor>();
+		this.dinero = 0;
 	}
 
 	public String getNombre() {
 		return nombre;
 	}
-
-	public void insertarDinero(float cantidad) {
-		this.dinero = cantidad;
+	
+	public float getDinero() {
+		return this.dinero;
 	}
 
 	public void insertarActor(Actor actor) {
 		listaActores.add(actor);
+	}
+	
+	public void insertarDinero(float cantidad) {
+		this.dinero =+ cantidad;
+	}
+	
+	public void imprimir() {
+		for (Actor actor : listaActores) {
+			System.out.println("-" + actor.getNombre());
+		}
+		System.out.print("\nSe han obtenido: " + listaActores.size() + " actores.");
 	}
 
 	@Override

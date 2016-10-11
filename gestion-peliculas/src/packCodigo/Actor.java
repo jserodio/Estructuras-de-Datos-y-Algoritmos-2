@@ -28,8 +28,9 @@ public class Actor implements Comparable<Actor> {
 	
 	public void imprimir() {
 		for (Pelicula pelicula : listaPeliculas) {
-			System.out.println("\n" + pelicula.getNombre());
+			System.out.println("-" + pelicula.getNombre());
 		}
+		System.out.print("\nSe han obtenido: " + listaPeliculas.size() + " peliculas.");
 	}
 	
 	public void insertarPelicula(Pelicula peli) {

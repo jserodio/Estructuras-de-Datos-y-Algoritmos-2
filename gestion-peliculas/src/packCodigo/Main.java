@@ -26,6 +26,10 @@ public class Main {
 			System.out.println(" buscar pelicula");
 			System.out.println(" insertar actor");
 			System.out.println(" insertar pelicula");
+			System.out.println(" peliculas de un actor");
+			System.out.println(" actores de una pelicula");
+			System.out.println(" insertar peliculas de un actor");
+			System.out.println(" insertar actores de una pelicula");
 			System.out.println(" salir");
 			System.out.print("> ");
 			elegido = in.nextLine();
@@ -147,6 +151,17 @@ public class Main {
 					else System.out.println("Debe cargar los datos primero, o insertar alguna pelicula.");
 				}
 				System.out.print('\n');
+				break;
+			case "peliculas de un actor":
+				System.out.println("Escriba el nombre del actor: ");
+				System.out.print("> ");
+				nActor = in.nextLine();
+				System.out.print("\nBuscando sus peliculas, espere por favor.\n");
+				timer = new Stopwatch();
+				actor = new Actor(nActor);
+				actor = SingleActores.getSingle().getLista().get(SingleActores.getSingle().buscarActor(actor)); // obtener objeto original
+				System.out.println(timer.elapsedTime() + " segundos.\n");
+				actor.imprimir();
 				break;
 			case "salir":
 				System.out.println("Bye!\n");
