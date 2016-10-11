@@ -34,7 +34,7 @@ public class Pelicula {
 		for (Actor actor : listaActores) {
 			System.out.println("-" + actor.getNombre());
 		}
-		System.out.print("\nSe han obtenido: " + listaActores.size() + " actores.");
+		System.out.print("\nSe han obtenido: " + listaActores.size() + " actores.\n\n");
 	}
 
 	@Override
