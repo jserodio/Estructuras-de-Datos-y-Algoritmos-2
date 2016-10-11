@@ -38,16 +38,20 @@ public class TestSinglePeliculas {
 	
 	@org.junit.Test
 	public void testCargarDatosCasoB() {
+		
+		SingleActores.getSingle().vaciarLista();
+		SinglePeliculas.getSingle().vaciarLista();
+		
 		SinglePeliculas.getSingle().cargarDatos("ficheros/casoB.txt");
 		// resultados
-		int esperado = 4; // 1 pelicula de antes + 3 peliculas nuevas
+		int esperado = 3; // 3 peliculas nuevas
 		int obtenido = SinglePeliculas.getSingle().getLista().size();
-		// tiene que dar true, cuatro peliculas obtenidas
+		// tiene que dar true, 3 peliculas
 		assertEquals(esperado, obtenido);
 		
-		esperado = 8; // 3 peliculas del test anterior + 5 peliculas nuevas
+		esperado = 5; // 5 actores nuevas
 		obtenido = SingleActores.getSingle().getLista().size();
-		// tiene que dar true, tres actores
+		// tiene que dar true, cinco actores
 		assertEquals(esperado, obtenido);
 	}
 

@@ -89,5 +89,26 @@ public class TestSingleActores {
 		// Tiene que devolver null porque no lo ha podido eliminar
 		assertEquals(esperado, obtenido);
 	}
+	
+	@org.junit.Test
+	public void insertarActor() {
+		Actor esperado;
+		
+		// Si lista vacia
+		SingleActores.getSingle().vaciarLista();
+		
+		esperado = new Actor("Actor 1");
+		assertTrue(SingleActores.getSingle().insertarActor(esperado));	
+		assertTrue(SingleActores.getSingle().estaActor(esperado));
+		assertTrue(SingleActores.getSingle().getLista().size() == 1);
+		
+		// Si lista contiene datos
+		// La lista de actores ahora mismo contiene el actor previamente insertado
+		
+		esperado = new Actor("Actor 2");
+		assertTrue(SingleActores.getSingle().insertarActor(esperado));
+		assertTrue(SingleActores.getSingle().estaActor(esperado));
+		assertTrue(SingleActores.getSingle().getLista().size() == 2);
+	}
 
 }
