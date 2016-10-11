@@ -31,7 +31,7 @@ public class SinglePeliculas {
 	 * CODIGO DE SINGLEPELICULAS
 	 * 
 	 */
-	private final ArrayList<Pelicula>	lista				= new ArrayList<Pelicula>();
+	private ArrayList<Pelicula> lista = new ArrayList<Pelicula>();
 	
 	public void cargarDatos(String ruta) {
 
@@ -43,8 +43,8 @@ public class SinglePeliculas {
 			Scanner input = null;
 			input = new Scanner(new FileReader(ruta));
 			String linea;
-			
-			System.out.println("Cargando archivo, espere por favor.");
+			Actor actor;
+			Pelicula pelicula;
 			
 			while (input.hasNext()) {
 
@@ -64,11 +64,11 @@ public class SinglePeliculas {
 				String f[] = linea.split(" ---> ");
 
 				// Imprimir pelicula
-				// System.out.println("Pelicula: " + f[0]);
+//				System.out.println("Pelicula: " + f[0]);
 
 				// Instanciar el objeto pelicula e insertarlo a la lista
-				Pelicula peli = new Pelicula(f[0]);
-				SinglePeliculas.getSingle().insertarPelicula(peli);
+				pelicula = new Pelicula(f[0]);
+				SinglePeliculas.getSingle().insertarPelicula(pelicula);
 
 				if (f.length > 1) {
 					// Dividir f[1] en un array g[] con diferentes posiciones
@@ -86,11 +86,11 @@ public class SinglePeliculas {
 						// Si el actor no esta en la listaHash
 						if (listaHash.containsKey(item) == false) {
 							
-							Actor actor = new Actor(item);
+							actor = new Actor(item);
 							listaHash.put(item, actor);
 							
 							SingleActores.getSingle().insertarActor(actor);
-							// System.out.println("Actor: " + item);
+//							System.out.println("Actor: " + item);
 							
 						}
 						
@@ -98,21 +98,16 @@ public class SinglePeliculas {
 						// Si el actor es nuevo, se inserta en la lista HashMap
 						// Si no es un actor nuevo, igualmente estaba en la lista
 						// Pase lo que pase, se obtiene el objeto Actor previamente creado
-						Actor actor = listaHash.get(item);
-						peli.insertarActor(actor);
+						actor = listaHash.get(item);
+						pelicula.insertarActor(actor);
 						
 						// Para este actor, sea uno nuevo, o antiguo, insertamos su peli
-						actor.insertarPelicula(peli);
+						actor.insertarPelicula(pelicula);
 					}
 
 				}
 			}
 			input.close();
-
-			System.out.println("El archivo ha sido cargado.");
-
-			// return algo;
-
 		} catch (FileNotFoundException e) {
 			System.out.println('\n' + "No se pudo encontrar el archivo.");
 			System.out.println("La ruta especificada: " + ruta);
@@ -138,9 +133,12 @@ public class SinglePeliculas {
 	 */
 	public void imprimir() {
 		System.out.print("\n");
-		lista.stream().map(Pelicula::getNombre).forEach(nombrePelicula -> System.out.println("-" + nombrePelicula));
-		System.out.print("\n");
-		System.out.println("Se han listado " + lista.size() + " peliculas.\n");
+		if (lista != null) {
+			lista.stream().map(Pelicula::getNombre).forEach(nombrePelicula -> System.out.println("-" + nombrePelicula));
+			System.out.println("Se han listado " + lista.size() + " peliculas.\n");
+		} else {
+			System.out.println("Debe cargar los datos primero.");
+		}
 	}
 
 	/**
@@ -154,4 +152,10 @@ public class SinglePeliculas {
 		return lista.indexOf(pelicula);
 	}
 
+	/**
+	 * Vaciar lista.
+	 */
+	public void vaciarLista() {
+		this.lista = new ArrayList<Pelicula>();
+	}
 }

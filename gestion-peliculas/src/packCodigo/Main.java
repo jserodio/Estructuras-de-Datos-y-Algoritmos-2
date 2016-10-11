@@ -25,8 +25,10 @@ public class Main {
 			System.out.println();
 			switch (elegido) {
 			case "cargar":
+				System.out.println("Cargando archivo, espere por favor.");
 				timer = new Stopwatch();
 				SinglePeliculas.getSingle().cargarDatos("ficheros/FilmsActors20162017.txt");
+				System.out.println("El archivo ha sido cargado.");
 				System.out.println(timer.elapsedTime() + " segundos.\n");
 				break;
 			case "leer actores":
@@ -39,10 +41,13 @@ public class Main {
 				System.out.println("Escriba el nombre del actor a buscar: ");
 				System.out.print("> ");
 				String nActor = in.nextLine();
-				System.out.print("\n");
+				System.out.print("\nBuscando, espere por favor.");
+				timer = new Stopwatch();
 				Actor actor = new Actor(nActor);
 				// condicion del if.
 				int posicion = SingleActores.getSingle().buscarActor(actor);
+				System.out.print('\n');
+				System.out.println(timer.elapsedTime() + " segundos.\n");
 				if (posicion < 0) {
 					System.out.println("El actor no existe.\n");
 				} else {
@@ -53,10 +58,13 @@ public class Main {
 				System.out.println("Escriba el nombre de la pelicula a buscar: ");
 				System.out.print("> ");
 				String nPelicula = in.nextLine();
-				System.out.print("\n");
+				System.out.print("\nBuscando, espere por favor.");
+				timer = new Stopwatch();
 				Pelicula pelicula = new Pelicula(nPelicula);
 				// condicion del if.
 				int posicion2 = SinglePeliculas.getSingle().buscarPelicula(pelicula);
+				System.out.print('\n');
+				System.out.println(timer.elapsedTime() + " segundos.\n");
 				if (posicion2 < 0) {
 					System.out.println("La pelicula no existe.\n");
 				} else {
@@ -68,15 +76,18 @@ public class Main {
 				break;
 			case "ordenar":
 				timer = new Stopwatch();
+				System.out.println("Ordenando, espere por favor.");
 				String actores[] = SingleActores.getSingle().ordenar();
 				System.out.println(timer.elapsedTime() + " segundos.\n");
 				System.out.println("Quieres ver la lista ordenada? (si/no)");
 				System.out.print("> ");
 				String respuesta = in.nextLine();
 				if (respuesta.equalsIgnoreCase("si")) {
-					for (String a : actores) {
-						System.out.println('-' + a);
-					}
+					if (actores != null)
+						for (String a : actores) {
+							System.out.println('-' + a);
+						}
+					else System.out.println("\nDebe cargar los datos primero.");
 				}
 				System.out.print('\n');
 				break;
