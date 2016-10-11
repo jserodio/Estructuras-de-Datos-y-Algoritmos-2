@@ -1,5 +1,6 @@
 package packCodigo;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -30,9 +31,7 @@ public class Main {
 			System.out.println(" peliculas de un actor");
 			System.out.println(" actores de una pelicula");
 			System.out.println(" insertar peliculas de un actor");
-			System.out.println(" insertar actores de una pelicula");
 			System.out.println(" eliminar actor");
-			System.out.println(" eliminar pelicula");
 			System.out.println(" incrementar dinero");
 			System.out.println(" guardar");
 			System.out.println(" salir");
@@ -52,6 +51,42 @@ public class Main {
 				break;
 			case "leer peliculas":
 				SinglePeliculas.getSingle().imprimir();
+				break;
+			case "ordenar actores":
+				timer = new Stopwatch();
+				System.out.println("Ordenando, espere por favor.");
+				String actores[] = SingleActores.getSingle().ordenar();
+				System.out.println(timer.elapsedTime() + " segundos.\n");
+				System.out.println("Quieres ver la lista de actores ordenada? (si/no)");
+				System.out.print("> ");
+				respuesta = in.nextLine();
+				if (respuesta.equalsIgnoreCase("si")) {
+					System.out.print('\n');
+					if (actores != null)
+						for (String a : actores) {
+							System.out.println('-' + a);
+						}
+					else System.out.println("Debe cargar los datos primero, o insertar algun actor.");
+				}
+				System.out.print('\n');
+				break;
+			case "ordenar peliculas":
+				timer = new Stopwatch();
+				System.out.println("Ordenando, espere por favor.");
+				String peliculas[] = SinglePeliculas.getSingle().ordenar();
+				System.out.println(timer.elapsedTime() + " segundos.\n");
+				System.out.println("Quieres ver la lista de peliculas ordenada? (si/no)");
+				System.out.print("> ");
+				respuesta = in.nextLine();
+				if (respuesta.equalsIgnoreCase("si")) {
+					System.out.print('\n');
+					if (peliculas != null)
+						for (String p : peliculas) {
+							System.out.println('-' + p);
+						}
+					else System.out.println("Debe cargar los datos primero, o insertar alguna pelicula.");
+				}
+				System.out.print('\n');
 				break;
 			case "buscar actor":
 				System.out.println("Escriba el nombre del actor a buscar: ");
@@ -118,42 +153,6 @@ public class Main {
 					System.out.println(nPelicula + " insertada correctamente.");
 				} else {
 					System.out.println("No se pudo insertar la pelicula.");
-				}
-				System.out.print('\n');
-				break;
-			case "ordenar actores":
-				timer = new Stopwatch();
-				System.out.println("Ordenando, espere por favor.");
-				String actores[] = SingleActores.getSingle().ordenar();
-				System.out.println(timer.elapsedTime() + " segundos.\n");
-				System.out.println("Quieres ver la lista de actores ordenada? (si/no)");
-				System.out.print("> ");
-				respuesta = in.nextLine();
-				if (respuesta.equalsIgnoreCase("si")) {
-					System.out.print('\n');
-					if (actores != null)
-						for (String a : actores) {
-							System.out.println('-' + a);
-						}
-					else System.out.println("Debe cargar los datos primero, o insertar algun actor.");
-				}
-				System.out.print('\n');
-				break;
-			case "ordenar peliculas":
-				timer = new Stopwatch();
-				System.out.println("Ordenando, espere por favor.");
-				String peliculas[] = SinglePeliculas.getSingle().ordenar();
-				System.out.println(timer.elapsedTime() + " segundos.\n");
-				System.out.println("Quieres ver la lista de peliculas ordenada? (si/no)");
-				System.out.print("> ");
-				respuesta = in.nextLine();
-				if (respuesta.equalsIgnoreCase("si")) {
-					System.out.print('\n');
-					if (peliculas != null)
-						for (String p : peliculas) {
-							System.out.println('-' + p);
-						}
-					else System.out.println("Debe cargar los datos primero, o insertar alguna pelicula.");
 				}
 				System.out.print('\n');
 				break;
@@ -237,25 +236,28 @@ public class Main {
 				System.out.println("\nSe insertaron correctamente " + pelis.length + " peliculas.\n");
 				System.out.println(timer.elapsedTime() + " segundos.\n");
 				break;
-			case "insertar actores de una pelicula":
-				System.out.println("Sin implementar aun.");
-				break;
 			case "eliminar actor":
 				System.out.println("Escriba el nombre del actor: ");
 				System.out.print("> ");
 				nActor = in.nextLine();
 				timer = new Stopwatch();
 				actor = new Actor(nActor);
+				try { // intenta buscar el actor en la lista, si no lo encuentra, crea uno nuevo y lo añade a la lista de actores.
+					actor = SingleActores.getSingle().getLista().get(SingleActores.getSingle().buscarActor(actor)); // obtener objeto original
+				} catch (IndexOutOfBoundsException e) {
+					System.out.println("Error.");
+				}
+				// Por cada pelicula de este actor, eliminar su pelicula
+				ArrayList<Pelicula> pelisDelActor = actor.getListaPeliculas();
+				for (Pelicula peli : pelisDelActor) {
+					peli.eliminarActor(actor); // de cada peli eliminamos el actor
+				}
 				if (SingleActores.getSingle().eliminarActor(actor).equals(actor)){
 					System.out.println("\nEliminado correctamente.\n");
 					System.out.println(timer.elapsedTime() + " segundos.\n");
 				} else {
 					System.out.println("El actor no existe.");
 				}
-				
-				break;
-			case "eliminar pelicula":
-				System.out.println("Sin implementar aun.");
 				break;
 			case "incrementar dinero":
 				System.out.println("Sin implementar aun.");

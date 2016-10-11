@@ -26,6 +26,10 @@ public class Pelicula {
 		listaActores.add(actor);
 	}
 	
+	public void eliminarActor(Actor actor) {
+		listaActores.remove(actor);
+	}
+	
 	public void insertarDinero(float cantidad) {
 		this.dinero =+ cantidad;
 	}
@@ -61,4 +65,5 @@ public class Pelicula {
 			return false;
 		return true;
 	}
+
 }
