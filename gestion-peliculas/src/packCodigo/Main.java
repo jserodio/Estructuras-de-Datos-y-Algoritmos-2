@@ -1,5 +1,6 @@
 package packCodigo;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,6 +16,11 @@ public class Main {
 		String nActor;
 		String nPelicula;
 		String respuesta;
+		
+		/**
+		 * Cambiar la ruta de los archivos por el fichero elegido. DEFAULT = "ficheros/FilmsActors20162017.txt"
+		 */
+		final String RUTA = "ficheros/papelones.txt";
 		
 		// mientras elegido != salir no se cerrara el programa
 		do {
@@ -42,7 +48,7 @@ public class Main {
 			case "cargar":
 				System.out.println("Cargando archivo, espere por favor.");
 				timer = new Stopwatch();
-				SinglePeliculas.getSingle().cargarDatos("ficheros/FilmsActors20162017.txt");
+				SinglePeliculas.getSingle().cargarDatos(RUTA);
 				System.out.println("El archivo ha sido cargado.");
 				System.out.println(timer.elapsedTime() + " segundos.\n");
 				break;
@@ -279,7 +285,14 @@ public class Main {
 				System.out.print("\n");
 				break;
 			case "guardar":
-				System.out.println("Sin implementar aun.");
+				System.out.println("Escriba el nombre del archivo: ");
+				System.out.print("> ");
+				String ruta = in.nextLine();
+				try {
+					SinglePeliculas.getSingle().guardarDatos(ruta);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				break;
 			case "salir":
 				System.out.println("Bye!\n");

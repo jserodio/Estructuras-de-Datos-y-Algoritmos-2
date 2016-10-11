@@ -1,6 +1,14 @@
 package packCodigo;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -116,8 +124,28 @@ public class SinglePeliculas {
 
 	}
 
-	public void guardarDatos(String ruta) {
-		// guardar
+	/**
+	 * Guarda las peliculas y los actores.
+	 * 
+	 * @param ruta		Especifica el nombre del fichero y donde se guardará.
+	 */
+	public void guardarDatos(String ruta) throws IOException {
+		String[] actores;
+		String g;
+		String linea;
+		
+		Charset myCharset = StandardCharsets.UTF_8;
+
+		Writer writer = new OutputStreamWriter( new FileOutputStream("ficheros/" + ruta), myCharset );
+		
+		for (Pelicula peli : this.lista) {
+			actores = peli.getListaActores().stream().map(Actor::getNombre).toArray(String[]::new);
+			g = String.join(" &&& ", actores);
+			linea = String.join(" ---> ", peli.getNombre(), g );
+			writer.write(linea + '\n');
+		}
+		writer.flush();
+		writer.close();
 	}
 
 	public boolean insertarPelicula(Pelicula pelicula) {

@@ -21,6 +21,10 @@ public class Pelicula {
 	public float getDinero() {
 		return this.dinero;
 	}
+	
+	public ArrayList<Actor> getListaActores() {
+		return this.listaActores;
+	}
 
 	public void insertarActor(Actor actor) {
 		listaActores.add(actor);
