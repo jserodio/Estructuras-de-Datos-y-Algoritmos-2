@@ -106,7 +106,7 @@ public class SingleActores {
 		// si lista esta vacia
         if (lista.equals(null) || lista.size()==0) {
         	nombresOrdenados = null;
-        	System.out.println("Debe cargar los datos primero.");
+        	System.out.println("Debe cargar los datos primero o insertar nuevos.");
         } else {
 	    	// array de strings con tamano original de la lista
 	    	nombresOrdenados = lista.stream().map(Actor::getNombre).toArray(String[]::new);

@@ -32,6 +32,7 @@ public class SinglePeliculas {
 	 * 
 	 */
 	private ArrayList<Pelicula> lista = new ArrayList<Pelicula>();
+	private String[] nombresOrdenados;
 	
 	public void cargarDatos(String ruta) {
 
@@ -120,8 +121,8 @@ public class SinglePeliculas {
 		// guardar
 	}
 
-	public void insertarPelicula(Pelicula pelicula) {
-		lista.add(pelicula);
+	public boolean insertarPelicula(Pelicula pelicula) {
+		return lista.add(pelicula);
 	}
 	
 	public ArrayList<Pelicula> getLista() {
@@ -135,7 +136,7 @@ public class SinglePeliculas {
 		System.out.print("\n");
 		if (lista != null) {
 			lista.stream().map(Pelicula::getNombre).forEach(nombrePelicula -> System.out.println("-" + nombrePelicula));
-			System.out.println("Se han listado " + lista.size() + " peliculas.\n");
+			System.out.println("\nSe han listado " + lista.size() + " peliculas.\n");
 		} else {
 			System.out.println("Debe cargar los datos primero.");
 		}
@@ -152,6 +153,60 @@ public class SinglePeliculas {
 		return lista.indexOf(pelicula);
 	}
 
+	/**
+	 * Ordenación por QuickSort.
+	 * Coste: O(n·Log2·n)
+	 * 
+	 * @return String[] ordenado. NULL si la lista está vacia.
+	 */
+	public String[] ordenar() {
+		
+		// si lista esta vacia
+        if (lista.equals(null) || lista.size()==0) {
+        	nombresOrdenados = null;
+        	System.out.println("Debe cargar los datos primero o insertar nuevos.");
+        } else {
+	    	// array de strings con tamano original de la lista
+	    	nombresOrdenados = lista.stream().map(Pelicula::getNombre).toArray(String[]::new);
+    		// algoritmo de quickSort
+        	nombresOrdenados = quickSort(0, lista.size() - 1);
+        }
+		
+		return nombresOrdenados;
+	}
+	
+	private String[] quickSort(int inicio, int fin) {
+	     int izq = inicio;
+	     int der = fin;
+	     String temp;
+	     String pivote = nombresOrdenados[inicio + (fin - inicio) / 2];
+	
+	     while (izq <= der) {
+	         while (nombresOrdenados[izq].compareToIgnoreCase(pivote) < 0) {
+	             izq++;
+	         }
+	
+	         while (nombresOrdenados[der].compareToIgnoreCase(pivote) > 0) {
+	             der--;
+	         }
+	
+	         if (izq <= der) {
+	    	     temp = nombresOrdenados[izq];
+	    	     nombresOrdenados[izq] = nombresOrdenados[der];
+	    	     nombresOrdenados[der] = temp;
+	             izq++;
+	             der--;
+	         }
+	     }
+	     if (inicio < der) {
+	    	 quickSort(inicio, der); // recursividad
+	     }
+	     if (izq < fin) {
+	         quickSort(izq, fin); // recursividad
+	     }
+	     return nombresOrdenados;
+	}
+	
 	/**
 	 * Vaciar lista.
 	 */
