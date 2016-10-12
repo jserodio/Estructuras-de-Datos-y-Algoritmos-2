@@ -16,11 +16,8 @@ public class Main {
 		String nActor;
 		String nPelicula;
 		String respuesta;
-		
-		/**
-		 * Cambiar la ruta de los archivos por el fichero elegido. DEFAULT = "ficheros/FilmsActors20162017.txt"
-		 */
-		final String RUTA = "ficheros/papelones.txt";
+		String ruta;
+		boolean correcto;
 		
 		// mientras elegido != salir no se cerrara el programa
 		do {
@@ -40,15 +37,20 @@ public class Main {
 			System.out.println(" eliminar actor");
 			System.out.println(" incrementar dinero");
 			System.out.println(" guardar");
+			System.out.println(" reiniciar");
 			System.out.println(" salir");
 			System.out.print("> ");
 			elegido = in.nextLine();
 			System.out.println();
 			switch (elegido) {
 			case "cargar":
+				System.out.println("Escriba el nombre del archivo, por ejemplo (FilmsActors20162017.txt, o FilmsActors20162017Small.txt).");
+				System.out.println("Los archivos se cargan desde la carpeta 'ficheros', en la raiz del ejecutable: ");
+				System.out.print("> ");
+				ruta = in.nextLine();
 				System.out.println("Cargando archivo, espere por favor.");
 				timer = new Stopwatch();
-				SinglePeliculas.getSingle().cargarDatos(RUTA);
+				SinglePeliculas.getSingle().cargarDatos(ruta);			
 				System.out.println("El archivo ha sido cargado.");
 				System.out.println(timer.elapsedTime() + " segundos.\n");
 				break;
@@ -207,7 +209,7 @@ public class Main {
 				System.out.println("\nEste actor tiene estas peliculas: ");
 				actor.imprimir();
 				
-				boolean correcto = false;
+				correcto = false;
 				while (!correcto) {
 					System.out.print("Por favor, introduzca sus peliculas en formato CSV.\n");
 					System.out.print("Es decir, peliculas separadas por comas, (coma y espacio) ejemplo: \"Titanic, Star Wars, El Quinto Elemento\".\n");
@@ -251,19 +253,24 @@ public class Main {
 				try { // intenta buscar el actor en la lista
 					actor = SingleActores.getSingle().getLista().get(SingleActores.getSingle().buscarActor(actor)); // obtener objeto original
 				} catch (IndexOutOfBoundsException e) {
-					System.out.println("Error.");
+					System.out.println("\nError.");
 				}
 				// Por cada pelicula de este actor, eliminar su pelicula
 				ArrayList<Pelicula> pelisDelActor = actor.getListaPeliculas();
 				for (Pelicula peli : pelisDelActor) {
 					peli.eliminarActor(actor); // de cada peli eliminamos el actor
 				}
-				if (SingleActores.getSingle().eliminarActor(actor).equals(actor)){
-					System.out.println("\nEliminado correctamente.\n");
-					System.out.println(timer.elapsedTime() + " segundos.\n");
-				} else {
-					System.out.println("El actor no existe.");
+				try {
+					if (SingleActores.getSingle().eliminarActor(actor).equals(actor)){
+						System.out.println("\nEliminado correctamente.\n");
+						System.out.println(timer.elapsedTime() + " segundos.\n");
+					} else {
+							System.out.println("\nEl actor no existe.\n");
+					}
 				}
+				catch (NullPointerException e) {
+						System.out.println("\nEl actor no existe.\n");
+					}
 				break;
 			case "incrementar dinero":
 				System.out.println("Escriba el nombre de la pelicula: ");
@@ -285,13 +292,27 @@ public class Main {
 				System.out.print("\n");
 				break;
 			case "guardar":
-				System.out.println("Escriba el nombre del archivo: ");
+				System.out.println("Escriba el nombre del archivo, por ejemplo (papelones.txt).");
+				System.out.println("Los archivos se guardan en la carpeta 'ficheros', en la raiz del ejecutable: ");
 				System.out.print("> ");
-				String ruta = in.nextLine();
+				ruta = in.nextLine();
+				System.out.println("Guardando, espere por favor.");
+				timer = new Stopwatch();
 				try {
 					SinglePeliculas.getSingle().guardarDatos(ruta);
+					System.out.println(timer.elapsedTime() + " segundos.\n");
 				} catch (IOException e) {
 					e.printStackTrace();
+				}
+				break;
+			case "reiniciar":
+				System.out.println("Se va a eliminar la informacion cargada.");
+				System.out.println("\nEs correcto? (si/no)");
+				System.out.print("> ");
+				respuesta = in.nextLine();
+				if (respuesta.equalsIgnoreCase("si")) {
+					SingleActores.getSingle().vaciarLista();
+					SinglePeliculas.getSingle().vaciarLista();
 				}
 				break;
 			case "salir":

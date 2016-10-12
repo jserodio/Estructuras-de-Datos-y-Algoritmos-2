@@ -43,11 +43,15 @@ public class SinglePeliculas {
 
 		Map<String, Actor> listaHash = new HashMap<String, Actor>();
 
+		// vacio los datos anteriores
+		this.vaciarLista();
+		SingleActores.getSingle().vaciarLista();
+		
 		try {
 
 			// Abriendo el fichero
 			Scanner input = null;
-			input = new Scanner(new FileReader(ruta));
+			input = new Scanner(new FileReader("ficheros/" + ruta));
 			String linea;
 			Actor actor;
 			Pelicula pelicula;
@@ -124,6 +128,7 @@ public class SinglePeliculas {
 
 	/**
 	 * Guarda las peliculas y los actores.
+	 * Precondicion: Para que un actor se guarde, tiene que tener asociada una pelicula.
 	 * 
 	 * @param ruta		Especifica el nombre del fichero y donde se guardará.
 	 */
