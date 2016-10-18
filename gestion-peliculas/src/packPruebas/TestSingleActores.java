@@ -94,7 +94,6 @@ public class TestSingleActores {
 	public void insertarActor() {
 		Actor esperado;
 		
-		// Si lista vacia
 		SingleActores.getSingle().vaciarLista();
 		
 		esperado = new Actor("Actor 1");
