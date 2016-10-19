@@ -88,7 +88,19 @@ return null;
 	   public Iterator<T> iterator() { return new ListIterator(); } 
 
 	   // an iterator, doesn't implement remove() since it's optional 
-	   private class ListIterator implements Iterator<T> { 
+	   private class ListIterator implements Iterator<T> {
+
+		@Override
+		public boolean hasNext() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public T next() {
+			// TODO Auto-generated method stub
+			return null;
+		} 
 
 		// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
 
