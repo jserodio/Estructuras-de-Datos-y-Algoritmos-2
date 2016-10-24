@@ -27,24 +27,70 @@ public class CircularLinkedList<T> implements ListADT<T> {
 
 	/**
 	 * Elimina el primer elemento de la lista
-	 * Precondición: la lista tiene al menos un elemento
-	 * COMPLETAR EL CODIGO Y CALCULAR EL COSTE
+	 * Precondición: Ninguna.
+	 * Postcondición: elimina el primer elemento de la lista.
+	 * Coste: O(1)
+	 * 
+	 * @return	Elemento eliminado. NULL si lista vacia.
 	 */
 	public T removeFirst() {
-	
-		return null;
+		T aux;
+		
+		if (isEmpty()) {
+			return null;
+		}
+		
+		// Guardar el elemento a eliminar
+		aux = last.next.data;
+		
+		// Si solo hay un elemento
+		if (this.size() == 1) {
+			last = null;
+			count = 0;
+			return aux;
+		} 
+		
+		// Si hay más elementos
+		last.next = last.next.next;
+		
+		count--;
+		return aux;
 	}
 
 	/**
 	 * Elimina el último elemento de la lista.
-	 * Precondición: la lista tiene al menos un elemento.
+	 * Precondición: Ninguna.
 	 * Postcondición: elimina el último elemento de la lista.
+	 * Coste: 
 	 * 
-	 * COMPLETAR EL CODIGO Y CALCULAR EL COSTE
+	 * @return elemento eliminado. NULL si no hay elementos que eliminar.
 	 */
 	public T removeLast() {
-	 
-		return null;
+		T aux;
+		
+		if (isEmpty()) {
+			return null;
+		}
+		
+		
+		
+		// Guardar el elemento a eliminar
+		aux = last.data;
+		/* TODO
+		// Si solo hay un elemento
+		if (this.size() == 1) {
+			
+			last = null;
+			count = 0;
+			return aux;
+		} 
+		
+		// Si hay más elementos
+		last.next = last.next.next;
+		
+		count--;
+		*/
+		return aux;
 	}
 
 	/**
@@ -101,6 +147,7 @@ public class CircularLinkedList<T> implements ListADT<T> {
 	
 	/**
 	 * Determina si la lista está vacía.
+	 * Coste: O(1)
 	 */
 	public boolean isEmpty() {
 		return last == null;
@@ -108,6 +155,7 @@ public class CircularLinkedList<T> implements ListADT<T> {
 	
 	/**
 	 * Determina el número de elementos de la lista.
+	 * Coste: O(1)
 	 */
 	public int size() {
 		return count;
@@ -122,17 +170,22 @@ public class CircularLinkedList<T> implements ListADT<T> {
 
 		/**
 		* Clase privada ListIterator.
-		* COMPLETAR EL CODIGO Y CALCULAR EL COSTE 
 		*/
 		private class ListIterator implements Iterator<T> {
 		
 			private Node<T> current = last.next;
 			
+			/**
+			 * Coste: O(1)
+			 */
 			@Override
 			public boolean hasNext() {
 				return (current != last);
 			}
 
+			/**
+			 * Coste: O(1)
+			 */
 			@Override
 			public T next() {
 				if (!hasNext()) throw new NoSuchElementException();
@@ -145,11 +198,15 @@ public class CircularLinkedList<T> implements ListADT<T> {
 		
 		/**
 		 * Imprime por pantalla cada nodo.
+		 * Coste: O(n) donde n es el número de elementos.
 		 */
         public void visualizarNodos() {
 			System.out.println(this.toString());
 		}
 
+        /**
+         * Coste: O(n) donde n es el número de elementos.
+         */
 		@Override
 		public String toString() {
 			String result = new String();
