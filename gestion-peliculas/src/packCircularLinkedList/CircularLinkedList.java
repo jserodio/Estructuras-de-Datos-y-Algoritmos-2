@@ -120,25 +120,28 @@ public class CircularLinkedList<T> implements ListADT<T> {
 		   return new ListIterator();
 	   } 
 
-	   /**
-	    * Clase privada ListIterator.
-	    * COMPLETAR EL CODIGO Y CALCULAR EL COSTE 
-	    */
-	   private class ListIterator implements Iterator<T> {
+		/**
+		* Clase privada ListIterator.
+		* COMPLETAR EL CODIGO Y CALCULAR EL COSTE 
+		*/
+		private class ListIterator implements Iterator<T> {
+		
+			private Node<T> current = last.next;
+			
+			@Override
+			public boolean hasNext() {
+				return (current != last);
+			}
 
-		@Override
-		public boolean hasNext() {
-			// TODO
-			return false;
-		}
+			@Override
+			public T next() {
+				if (!hasNext()) throw new NoSuchElementException();
+				T item = current.data;
+				current = current.next;
+				return item;
+			} 
 
-		@Override
-		public T next() {
-			// TODO
-			return null;
-		} 
-
-	   } // Clase privada.
+   } // Clase privada.
 		
 		/**
 		 * Imprime por pantalla cada nodo.
