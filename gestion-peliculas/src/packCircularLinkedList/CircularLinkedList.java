@@ -40,14 +40,32 @@ return null;
 
 		   }
 
-
+	/**
+     * Elimina un nodo que se encuentre en la lista ubicado
+     * por un valor de referencia.
+     * @param referencia valor del nodo que se desea eliminar.
+     */
 	public T remove(T elem) {
-	//Elimina un elemento concreto de la lista
-		// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
-		return null;
-
+		Node<T> temp = last;
+		Node<T> mishuevos = last;
+		int aux = 0;
+		
+		while(!temp.data.equals(elem)){
+			aux++;
+				mishuevos = temp;
+				temp = temp.next;
+				
+				if (aux == count){
+					return null;
+				}
+				}
+		
+		mishuevos.next = temp.next;
+		temp.next = null;
+		
+		return temp.data;
 	}
-
+		
 	public T first() {
 	//Da acceso al primer elemento de la lista
 	      if (isEmpty())
