@@ -18,7 +18,7 @@ public class CircularLinkedList<T> implements ListADT<T> {
 	}
 	
 	public void setDescr(String nom) {
-	  descr = nom;
+	  this.descr = nom;
 	}
 
 	public String getDescr() {
@@ -47,12 +47,12 @@ return null;
      */
 	public T remove(T elem) {
 		Node<T> temp = last;
-		Node<T> mishuevos = last;
+		Node<T> newNodo = last;
 		int aux = 0;
 		
 		while(!temp.data.equals(elem)){
 			aux++;
-				mishuevos = temp;
+				newNodo = temp;
 				temp = temp.next;
 				
 				if (aux == count){
@@ -60,7 +60,7 @@ return null;
 				}
 				}
 		
-		mishuevos.next = temp.next;
+		newNodo.next = temp.next;
 		temp.next = null;
 		
 		return temp.data;
