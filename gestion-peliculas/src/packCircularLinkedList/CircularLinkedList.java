@@ -29,7 +29,7 @@ public class CircularLinkedList<T> implements ListADT<T> {
 	// Elimina el primer elemento de la lista
         // Precondición: la lista tiene al menos un elemento
 		// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
-return null;
+		return null;
 	}
 
 	public T removeLast() {
@@ -49,6 +49,10 @@ return null;
 		Node<T> temp = last;
 		Node<T> newNodo = last;
 		int aux = 0;
+		
+		if (isEmpty()) {
+			return null;
+		}
 		
 		while(!temp.data.equals(elem)){
 			aux++;
