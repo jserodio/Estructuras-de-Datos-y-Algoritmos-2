@@ -10,8 +10,17 @@ public class UnorderedCircularLinkedList<T> extends CircularLinkedList<T> implem
 
 	public void addToRear(T elem) {
 	// añade un elemento al final 
-		// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
-
+		Node<T> newNodo = new Node(elem);
+		
+		if(isEmpty()){
+		last = newNodo;
+		newNodo.next = newNodo;
+		}else{
+		newNodo.next = last.next;
+		last.next = newNodo;
+		}
+		count++;
+		
 	}
 	
 	public void addAfter(T elem, T target) {
