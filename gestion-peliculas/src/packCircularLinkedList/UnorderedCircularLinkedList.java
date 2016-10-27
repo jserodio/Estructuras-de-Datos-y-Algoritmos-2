@@ -26,14 +26,33 @@ public class UnorderedCircularLinkedList<T> extends CircularLinkedList<T> implem
 		}else{
 			newNodo.next = last.next;
 			last.next = newNodo;
+			last = newNodo;
 		}
 		count++;
 		
 	}
 	
+	//ESTA SIN TERMINAR
 	public void addAfter(T elem, T target) {
 	// Añade elem detrás de otro elemento concreto, target,  que ya se encuentra en la lista
 		// ¡COMPLETAR OPCIONAL!
+		Node<T> newNodo = new Node(elem);
+		Node<T> temp = last;
+		int aux = 0;
+		
+		//Busca el objetivo en la lista
+		while(!temp.data.equals(target) || aux > size()){
+			temp = temp.next;
+			aux++;
+		}
+		//Comprueba si el target esta en la lista
+		if (aux > size()){
+			System.out.println("Elemento no encontrado");
+		}else{
+			
+				
+			}
+		}
 	}
 
-}
+
