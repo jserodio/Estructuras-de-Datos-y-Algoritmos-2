@@ -4,8 +4,16 @@ public class UnorderedCircularLinkedList<T> extends CircularLinkedList<T> implem
 	
 	public void addToFront(T elem) {
 	// añade un elemento al comienzo
-		// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
+		Node<T> newNodo = new Node(elem);
 
+		if(isEmpty()){
+			last = newNodo;
+			newNodo.next = newNodo;
+		}else{
+			newNodo.next = last.next;
+			last.next = newNodo;	
+		}
+		count++;
 	}
 
 	public void addToRear(T elem) {
@@ -13,11 +21,11 @@ public class UnorderedCircularLinkedList<T> extends CircularLinkedList<T> implem
 		Node<T> newNodo = new Node(elem);
 		
 		if(isEmpty()){
-		last = newNodo;
-		newNodo.next = newNodo;
+			last = newNodo;
+			newNodo.next = newNodo;
 		}else{
-		newNodo.next = last.next;
-		last.next = newNodo;
+			newNodo.next = last.next;
+			last.next = newNodo;
 		}
 		count++;
 		
