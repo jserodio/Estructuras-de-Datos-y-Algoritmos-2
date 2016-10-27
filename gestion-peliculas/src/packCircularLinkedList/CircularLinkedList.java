@@ -56,16 +56,17 @@ public class CircularLinkedList<T> implements ListADT<T> {
 		
 		while(!temp.data.equals(elem)){
 			aux++;
-				newNodo = temp;
-				temp = temp.next;
+			newNodo = temp;
+			temp = temp.next;
 				
-				if (aux == count){
+			if (aux == count){
 					return null;
-				}
-				}
+			}
+		}
 		
 		newNodo.next = temp.next;
 		temp.next = null;
+		count--;
 		
 		return temp.data;
 	}
@@ -105,33 +106,61 @@ public class CircularLinkedList<T> implements ListADT<T> {
 	public int size() 
 	//Determina el número de elementos de la lista
 	{ return count;};
-	
-	/** Return an iterator to the stack that iterates through the items . */ 
-	   public Iterator<T> iterator() { return new ListIterator(); } 
+			
+		/**
+		 *  Return an iterator to the stack that iterates through the items.
+		 */ 
+		   public Iterator<T> iterator() {
+			   return new ListIterator();
+		   } 
 
-	   // an iterator, doesn't implement remove() since it's optional 
-	   private class ListIterator implements Iterator<T> { 
+			/**
+			* Clase privada ListIterator.
+			*/
+			private class ListIterator implements Iterator<T> {
+			
+				private Node<T> current = last.next;
+				
+				/**
+				 * Coste: O(1)
+				 */
+				@Override
+				public boolean hasNext() {
+					return (current != last);
+				}
 
-		// COMPLETAR EL CODIGO Y CALCULAR EL COSTE
+				/**
+				 * Coste: O(1)
+				 */
+				@Override
+				public T next() {
+					if (!hasNext()) throw new NoSuchElementException();
+					T item = current.data;
+					current = current.next;
+					return item;
+				} 
 
+	   } // Clase privada.
+			
+			/**
+			 * Imprime por pantalla cada nodo.
+			 * Coste: O(n) donde n es el número de elementos.
+			 */
+	        public void visualizarNodos() {
+				System.out.println(this.toString());
+			}
 
-
-	   } // private class
-		
-		
-         public void visualizarNodos() {
-			System.out.println(this.toString());
-		}
-
-		@Override
-		public String toString() {
-			String result = new String();
-			Iterator<T> it = iterator();
-			while (it.hasNext()) {
-				T elem = it.next();
-				result = result + "[" + elem.toString() + "] \n";
-			}	
-			return "SimpleLinkedList " + result + "]";
-		}
-
+	        /**
+	         * Coste: O(n) donde n es el número de elementos.
+	         */
+			@Override
+			public String toString() {
+				String result = new String();
+				Iterator<T> it = iterator();
+				while (it.hasNext()) {
+					T elem = it.next();
+					result = result + "[" + elem.toString() + "] \n";
+				}	
+				return "SimpleLinkedList " + result + "]";
+			}
 }
