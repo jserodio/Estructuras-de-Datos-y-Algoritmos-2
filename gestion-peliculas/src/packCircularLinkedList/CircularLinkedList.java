@@ -18,7 +18,7 @@ public class CircularLinkedList<T> implements ListADT<T> {
 	}
 	
 	public void setDescr(String nom) {
-	  this.descr = nom;
+	  descr = nom;
 	}
 
 	public String getDescr() {
@@ -70,7 +70,7 @@ public class CircularLinkedList<T> implements ListADT<T> {
 		
 		return temp.data;
 	}
-		
+
 	public T first() {
 	//Da acceso al primer elemento de la lista
 	      if (isEmpty())
@@ -106,13 +106,9 @@ public class CircularLinkedList<T> implements ListADT<T> {
 	public int size() 
 	//Determina el número de elementos de la lista
 	{ return count;};
-			
-		/**
-		 *  Return an iterator to the stack that iterates through the items.
-		 */ 
-		   public Iterator<T> iterator() {
-			   return new ListIterator();
-		   } 
+	
+	/** Return an iterator to the stack that iterates through the items . */ 
+	   public Iterator<T> iterator() { return new ListIterator(); } 
 
 			/**
 			* Clase privada ListIterator.

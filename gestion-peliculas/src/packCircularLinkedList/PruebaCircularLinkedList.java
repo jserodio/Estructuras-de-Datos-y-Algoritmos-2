@@ -26,7 +26,7 @@ public class PruebaCircularLinkedList {
 		l.addToRear(0);
 		l.addToRear(20);
 		l.addToFront(8);
-		l.remove(new Integer(7));
+		//l.remove(new Integer(7));
 
 		
 		System.out.print(" Lista ...............");
