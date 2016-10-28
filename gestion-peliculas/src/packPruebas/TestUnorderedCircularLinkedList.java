@@ -11,17 +11,86 @@ public class TestUnorderedCircularLinkedList {
 
 	@Test
 	public void testAddToFront() {
-		fail("Not yet implemented");
+		// Crear la lista
+		UnorderedCircularLinkedList<Actor> lista = new UnorderedCircularLinkedList<Actor>();
+		
+		// Lista vacia
+		Actor actor1 = new Actor("actor1");
+		lista.addToFront(actor1);
+		
+		assertEquals(1, lista.size());
+		assertEquals(actor1, lista.last());
+		
+		// Lista con 1 nodo
+		Actor actor2 = new Actor("actor2");
+		lista.addToFront(actor2);
+		
+		assertEquals(2, lista.size());
+		assertEquals(actor1, lista.last());
+		
+		// Lista con 2 nodos
+		Actor actor3 = new Actor("actor3");
+		lista.addToFront(actor3);
+		
+		assertEquals(3, lista.size());
+		assertEquals(actor1, lista.last());
 	}
 
 	@Test
 	public void testAddToRear() {
-		fail("Not yet implemented");
+		// Crear la lista
+		UnorderedCircularLinkedList<Actor> lista = new UnorderedCircularLinkedList<Actor>();
+		
+		// Lista vacia
+		Actor actor1 = new Actor("actor1");
+		lista.addToRear(actor1);
+		
+		assertEquals(1, lista.size());
+		assertEquals(actor1, lista.last());
+		
+		// Lista con 1 nodo
+		Actor actor2 = new Actor("actor2");
+		lista.addToRear(actor2);
+		
+		assertEquals(2, lista.size());
+		assertEquals(actor2, lista.last());
+		
+		// Lista con 2 nodos
+		Actor actor3 = new Actor("actor3");
+		lista.addToRear(actor3);
+		
+		assertEquals(3, lista.size());
+		assertEquals(actor3, lista.last());
 	}
 
 	@Test
 	public void testAddAfter() {
-		fail("Not yet implemented");
+		// Crear la lista
+		UnorderedCircularLinkedList<Actor> lista = new UnorderedCircularLinkedList<Actor>();
+
+		Actor actor1 = new Actor("actor1");
+		lista.addToRear(actor1);
+		
+		// Lista con 1 nodo
+		Actor actor2 = new Actor("actor2");
+		lista.addAfter(actor2, actor1);
+		
+		assertEquals(2, lista.size());
+		assertEquals(actor2, lista.last());
+		
+		// Lista con 2 nodos
+		Actor actor3 = new Actor("actor3");
+		lista.addAfter(actor3, actor2);
+		
+		assertEquals(3, lista.size());
+		assertEquals(actor3, lista.last());
+		
+		// Lista con 3 nodos
+		Actor actor4 = new Actor("actor4");
+		lista.addAfter(actor4, actor1);
+		
+		assertEquals(4, lista.size());
+		assertEquals(actor3, lista.last());
 	}
 
 	@Test
