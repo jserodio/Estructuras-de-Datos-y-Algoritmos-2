@@ -68,7 +68,6 @@ public class CircularLinkedList<T> implements ListADT<T> {
 		// apuntar al final nodo
 		Node<T> current = last;
 		T data = null;
-		boolean encontrado = false;
 		
 		// Si no es vacio
 		if (!isEmpty()) {
