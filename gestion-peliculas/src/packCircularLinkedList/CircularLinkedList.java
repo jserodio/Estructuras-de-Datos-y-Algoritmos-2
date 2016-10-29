@@ -103,6 +103,7 @@ public class CircularLinkedList<T> implements ListADT<T> {
 	/**
      * Elimina un nodo que se encuentre en la lista ubicado
      * por un valor de referencia.
+     * Coste: O(n) donde n es el numero de elementos en la lista.
      * 
      * @param referencia valor del nodo que se desea eliminar.
      * @return elemento eliminado, o null en caso negativo.
@@ -136,6 +137,8 @@ public class CircularLinkedList<T> implements ListADT<T> {
 	
 	/**
 	 * Da acceso al primer elemento de la lista
+	 * Coste: O(1)
+	 * @return elemento
 	 */
 	public T first() {
 	      if (isEmpty())
@@ -145,6 +148,8 @@ public class CircularLinkedList<T> implements ListADT<T> {
 
 	/**
 	 * Da acceso al último elemento de la lista
+	 * Coste: O(1)
+	 * @return elemento
 	 */
 	public T last() {
 	      if (isEmpty())
@@ -154,6 +159,7 @@ public class CircularLinkedList<T> implements ListADT<T> {
 
 	/**
 	 * Determina si la lista contiene el elemento dado.
+	 * Coste: O(n) donde n es el numero de elementos en la lista.
 	 * 
 	 * @param elemento
 	 * @return TRUE si lo encuentra. FALSE si no.
@@ -181,6 +187,7 @@ public class CircularLinkedList<T> implements ListADT<T> {
 	/**
 	 * Determina si la lista contiene un elemento concreto,
 	 * y devuelve su referencia.
+	 * Coste: O(n) donde n es el numero de elementos en la lista.
 	 * 
 	 * @param elemento
 	 * @return referencia al elemento. NULL en caso de no encontrarlo.
@@ -208,6 +215,7 @@ public class CircularLinkedList<T> implements ListADT<T> {
 	/**
 	 * Determina si la lista está vacía.
 	 * Coste: O(1)
+	 * @return TRUE si vacio, FALSE si no.
 	 */
 	public boolean isEmpty() {
 		return last == null;
@@ -216,13 +224,14 @@ public class CircularLinkedList<T> implements ListADT<T> {
 	/**
 	 * Determina el número de elementos de la lista.
 	 * Coste: O(1)
+	 * @return cantidad de elementos en la lista.
 	 */
 	public int size() {
 		return count;
 	};
 	
 	/**
-	 *  Return an iterator to the stack that iterates through the items.
+	 *  Devuelve un iterador.
 	 */ 
 	   public Iterator<T> iterator() {
 		   return new ListIterator();

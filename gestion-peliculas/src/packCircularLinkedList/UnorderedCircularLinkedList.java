@@ -4,7 +4,7 @@ public class UnorderedCircularLinkedList<T> extends CircularLinkedList<T> implem
 	
 	/**
 	 * Añade un elemento al comienzo de la lista
-	 * 
+	 * Coste: O(1)
 	 * @param elemento a añadir
 	 */
 	public void addToFront(T elem) {
@@ -23,29 +23,30 @@ public class UnorderedCircularLinkedList<T> extends CircularLinkedList<T> implem
 
 	/**
 	 * Añade un elemento al final de la lista
-	 * 
+	 * Coste: O(1)
 	 * @param elemento a añadir
 	 */
 	public void addToRear(T elem) {
 		// crear el primer nodo
 		Node<T> nodo = new Node<T>(elem);
 		
-		if (this.size() == 0) {
+		if (isEmpty()) {
 			nodo.next = nodo;
-			this.last = nodo;
+			last = nodo;
 		}
 		
-		nodo.next = this.last.next;
-		this.last.next = nodo;
-		this.last = nodo;
+		nodo.next = last.next;
+		last.next = nodo;
+		last = nodo;
 		
-		this.count++;
+		count++;
 	}
 	
 	/**
 	 * Añade elem detrás de otro elemento concreto, target,
 	 * que ya se encuentra en la lista.
 	 * Opcional.
+	 * Coste: O(n) donde n es el numero de elementos.
 	 * 
 	 * Precondiciones: La lista tiene al menos 1 elemento.
 	 * 				   Elemento target existe en la lista.
@@ -61,21 +62,21 @@ public class UnorderedCircularLinkedList<T> extends CircularLinkedList<T> implem
 		// recorrer la lista hasta que el actual sea
 		// nodo T, entonces realizar las operaciones.
 		Node<T> current;
-		current = this.last.next;
+		current = last.next;
 		
 		while (!current.data.equals(nodoT.data)) {
 			current = current.next;
 		}
 		
 		if (current.data.equals(this.last.data)) {
-			this.last = nodo;
+			last = nodo;
 		}
 		
 		// Al salir del bucle, current es el target
 		nodo.next = current.next;
 		current.next = nodo;
 		
-		this.count++;
+		count++;
 	}
 	
 }
