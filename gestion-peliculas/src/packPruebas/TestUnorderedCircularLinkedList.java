@@ -496,6 +496,8 @@ public class TestUnorderedCircularLinkedList {
 	@Test
 	public void testIterator() {
 		
+		// Precondicion: tiene que funcionar contains.
+		
 		// Crear la lista
 		UnorderedCircularLinkedList<Actor> lista = new UnorderedCircularLinkedList<Actor>();
 		
@@ -512,14 +514,19 @@ public class TestUnorderedCircularLinkedList {
 		lista.addToRear(actor5);
 		lista.addToRear(actor6);
 		
-		Iterator it = lista.iterator();
+		Iterator<Actor> it = lista.iterator();
 		
 		while(it.hasNext()) {
 			Actor elem = (Actor) it.next();
 			lista2.addToRear(elem);
 		}
 		
-		assertTrue(lista.equals(lista2));
+		it = lista2.iterator();
+		
+		while(it.hasNext()) {
+			Actor elem = (Actor) it.next();
+			assertTrue(lista.contains(elem));
+		}
 	}
 
 }
