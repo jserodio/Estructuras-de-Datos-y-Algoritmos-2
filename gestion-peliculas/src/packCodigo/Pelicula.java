@@ -59,7 +59,12 @@ public class Pelicula {
 			System.out.println("-" + actor.getNombre());
 		}
 		*/
-		this.listaActores.visualizarNodos();
+		Iterator<Actor> it = this.listaActores.iterator();
+		
+		while (it.hasNext()) {
+			Actor elem = (Actor) it.next();
+			System.out.println("-" + elem.getNombre());
+		}
 		System.out.print("\nSe han obtenido: " + listaActores.size() + " actores.\n\n");
 	}
 

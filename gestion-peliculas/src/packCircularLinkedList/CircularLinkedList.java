@@ -1,6 +1,7 @@
 package packCircularLinkedList;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class CircularLinkedList<T> implements ListADT<T> {
 
@@ -232,14 +233,22 @@ public class CircularLinkedList<T> implements ListADT<T> {
 		*/
 		private class ListIterator implements Iterator<T> {
 		
-			private Node<T> current = last.next;
+			private Node<T> current = last;
+			boolean firstIteration = true;
 			
 			/**
 			 * Coste: O(1)
 			 */
 			@Override
 			public boolean hasNext() {
-				return (current != last);
+				// Si es la primera vez que entra
+				if (firstIteration) {
+					firstIteration = false;
+					return (current != last.next);
+				} else {
+					// si no
+					return (current != last);
+				}
 			}
 
 			/**
@@ -276,8 +285,6 @@ public class CircularLinkedList<T> implements ListADT<T> {
 				elem = it.next();
 				result = result + "[" + elem.toString() + "] \n";
 			}
-			elem = it.next();
-			result = result + "[" + elem.toString() + "] \n";
 			return "SimpleLinkedList:\n" + result;
 		}
 }
