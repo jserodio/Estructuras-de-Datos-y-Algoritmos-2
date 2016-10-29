@@ -1,7 +1,6 @@
 package packCircularLinkedList;
 
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 public class CircularLinkedList<T> implements ListADT<T> {
 
