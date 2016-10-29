@@ -5,16 +5,6 @@ import java.util.Iterator;
 
 public class PruebaCircularLinkedList {
 	
-	public static void visualizarNodos(UnorderedCircularLinkedList<Integer> l) {
-		Iterator<Integer> it = l.iterator();
-		System.out.println();
-		while (it.hasNext()) {
-			Integer num = it.next();
-			System.out.println(num);
-		}
-	}
-	
-	
 	public static void main(String[] args)  {
 		
 		UnorderedCircularLinkedList<Integer> l = new UnorderedCircularLinkedList<Integer>();
@@ -29,8 +19,8 @@ public class PruebaCircularLinkedList {
 		//l.remove(new Integer(7));
 
 		
-		System.out.print(" Lista ...............");
-		visualizarNodos(l);
+		System.out.println(" Lista ...............");
+		l.visualizarNodos();
 		System.out.println(" Num elementos: " + l.size());
 				
 		

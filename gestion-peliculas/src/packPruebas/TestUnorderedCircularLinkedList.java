@@ -2,6 +2,8 @@ package packPruebas;
 
 import static org.junit.Assert.*;
 
+import java.util.Iterator;
+
 import org.junit.Test;
 
 import packCircularLinkedList.UnorderedCircularLinkedList;
@@ -248,7 +250,7 @@ public class TestUnorderedCircularLinkedList {
 		
 			// Test
 			actual = lista.remove(new Actor("actor5"));
-			assertFalse(actual.equals(actor4));
+			assertTrue(actual == null);
 	}
 
 	@Test
@@ -370,7 +372,7 @@ public class TestUnorderedCircularLinkedList {
 		
 			// Test
 			actual = lista.contains(actor2);
-			assertEquals(actor2, actual);
+			assertEquals(true, actual);
 			
 	}
 
@@ -493,7 +495,31 @@ public class TestUnorderedCircularLinkedList {
 
 	@Test
 	public void testIterator() {
-		fail("Not yet implemented");
+		
+		// Crear la lista
+		UnorderedCircularLinkedList<Actor> lista = new UnorderedCircularLinkedList<Actor>();
+		
+		// Crear segunda lista recorriendo la primera
+		UnorderedCircularLinkedList<Actor> lista2 = new UnorderedCircularLinkedList<Actor>();
+		
+		Actor actor = new Actor("actor"), actor2 = actor, actor3 = actor, actor4 = actor,
+		actor5 = actor, actor6 = actor;
+		
+		lista.addToRear(actor);
+		lista.addToRear(actor2);
+		lista.addToRear(actor3);
+		lista.addToRear(actor4);
+		lista.addToRear(actor5);
+		lista.addToRear(actor6);
+		
+		Iterator it = lista.iterator();
+		
+		while(it.hasNext()) {
+			Actor elem = (Actor) it.next();
+			lista2.addToRear(elem);
+		}
+		
+		assertTrue(lista.equals(lista2));
 	}
 
 }

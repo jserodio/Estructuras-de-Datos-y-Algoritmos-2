@@ -97,33 +97,35 @@ public class CircularLinkedList<T> implements ListADT<T> {
 	/**
      * Elimina un nodo que se encuentre en la lista ubicado
      * por un valor de referencia.
+     * 
      * @param referencia valor del nodo que se desea eliminar.
+     * @return elemento eliminado, o null en caso negativo.
      */
 	public T remove(T elem) {
-
-		Node<T> temp = last;
-		Node<T> newNodo = last;
-		int aux = 0;
+		// apuntar al final nodo
+		Node<T> current = last;
+		T data = null;
+		boolean encontrado = false;
 		
-		if (isEmpty()) {
-			return null;
+		// Si es vacio
+		if (!isEmpty()) {
+			// Recorrer elementos
+			do {
+				if (current.next.data.equals(elem)) {
+					// para salir del bucle
+					encontrado = true;
+					// guardar elemento
+					data = current.next.data;
+					// eliminar nodo (saltarse al siguiente)
+					current.next = current.next.next;
+					count--;
+				}
+				current = current.next;
+				// hasta que current vuelva a ser el primero
+			} while ((current!=last) && (!encontrado));
 		}
 		
-		while(!temp.data.equals(elem)){
-			aux++;
-			newNodo = temp;
-			temp = temp.next;
-				
-			if (aux == count){
-					return null;
-			}
-		}
-		
-		newNodo.next = temp.next;
-		temp.next = null;
-		count--;
-		
-		return temp.data;
+		return data;
 	}
 	
 	/**
@@ -151,8 +153,23 @@ public class CircularLinkedList<T> implements ListADT<T> {
 	 * @return TRUE si lo encuentra. FALSE si no.
 	 */
 	public boolean contains(T elem) {
-	
-		return false;
+		
+		boolean encontrado = false;
+		
+		if (!isEmpty()) {
+			// Recorrer la lista
+			Node<T> current = last.next;
+			
+			do {
+				// comparar
+				if (current.data.equals(elem))
+					encontrado = true;
+				// avanzar al siguiente elemento
+				current = current.next;
+			} while( (current!=last.next) && (encontrado==false) );
+		}
+		
+		return encontrado;
 	}
 
 	/**
@@ -164,7 +181,22 @@ public class CircularLinkedList<T> implements ListADT<T> {
 	 */
 	public T find(T elem) {
 		
-		return null;
+		T data = null;
+		
+		if (!isEmpty()) {
+			// Recorrer la lista
+			Node<T> current = last.next;
+			
+			do {
+				// comparar
+				if (current.data.equals(elem))
+					data = current.data;
+				// avanzar al siguiente elemento
+				current = current.next;
+			} while( (current!=last.next) && (data==null) );
+		}
+		
+		return data;
 	}
 	
 	/**
@@ -210,7 +242,7 @@ public class CircularLinkedList<T> implements ListADT<T> {
 			 */
 			@Override
 			public T next() {
-				if (!hasNext()) throw new NoSuchElementException();
+				//if (!hasNext()) throw new NoSuchElementException();
 				T item = current.data;
 				current = current.next;
 				return item;
@@ -223,7 +255,8 @@ public class CircularLinkedList<T> implements ListADT<T> {
 		 * Coste: O(n) donde n es el número de elementos.
 		 */
         public void visualizarNodos() {
-			System.out.println(this.toString());
+        	if (!isEmpty())
+        		System.out.println(this.toString());
 		}
 
         /**
@@ -233,10 +266,13 @@ public class CircularLinkedList<T> implements ListADT<T> {
 		public String toString() {
 			String result = new String();
 			Iterator<T> it = iterator();
+			T elem;
 			while (it.hasNext()) {
-				T elem = it.next();
+				elem = it.next();
 				result = result + "[" + elem.toString() + "] \n";
-			}	
-			return "SimpleLinkedList " + result + "]";
+			}
+			elem = it.next();
+			result = result + "[" + elem.toString() + "] \n";
+			return "SimpleLinkedList:\n" + result;
 		}
 }
