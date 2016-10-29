@@ -174,6 +174,7 @@ public class TestUnorderedCircularLinkedList {
 			expected = null;
 			actual = lista.removeLast();
 			assertEquals(expected, actual);
+			assertEquals(0, lista.size());
 		
 		// Caso lista con un actor
 		Actor actor = new Actor("actor1");
@@ -182,6 +183,7 @@ public class TestUnorderedCircularLinkedList {
 			// Test
 			actual = lista.removeLast();
 			assertEquals(actor, actual);
+			assertEquals(0, lista.size());
 			
 		// Caso lista con 2 actors
 		Actor actor2 = new Actor("actor2");
@@ -191,6 +193,7 @@ public class TestUnorderedCircularLinkedList {
 			// Test
 			actual = lista.removeLast();
 			assertEquals(actor2, actual);
+			assertEquals(1, lista.size());
 			
 		// Caso lista con 3 actors
 		Actor actor3 = new Actor("actor3");
@@ -200,7 +203,7 @@ public class TestUnorderedCircularLinkedList {
 			// Test
 			actual = lista.removeLast();
 			assertEquals(actor3, actual);
-		
+			assertEquals(2, lista.size());
 	}
 
 	@Test

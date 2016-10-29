@@ -1,8 +1,5 @@
 package packCircularLinkedList;
 
-import java.util.Iterator;
-
-
 public class PruebaCircularLinkedList {
 	
 	public static void main(String[] args)  {

@@ -1,7 +1,6 @@
 package packCircularLinkedList;
 
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 public class CircularLinkedList<T> implements ListADT<T> {
 
@@ -61,36 +60,43 @@ public class CircularLinkedList<T> implements ListADT<T> {
 	 * Elimina el último elemento de la lista.
 	 * Precondición: Ninguna.
 	 * Postcondición: elimina el último elemento de la lista.
-	 * Coste: 
+	 * Coste: O(n) donde n es el número de elementos.
 	 * 
 	 * @return elemento eliminado. NULL si no hay elementos que eliminar.
 	 */
 	public T removeLast() {
-		T aux;
+		// apuntar al final nodo
+		Node<T> current = last;
+		T data = null;
+		boolean encontrado = false;
 		
-		if (isEmpty()) {
-			return null;
+		// Si no es vacio
+		if (!isEmpty()) {
+			
+			// guardar elemento
+			data = last.data;
+			
+			// Si solo hay un elemento
+			if (count==1) {
+				// vaciamos la lista
+				last = null;
+				
+			} else {
+				
+				do {
+					current = current.next;
+					// hasta que current vuelva a ser el primero
+				} while (current.next!=last);				
+				// hemos llegado al penultimo
+				// apuntar al siguiente no, al siguiente.
+				current.next = current.next.next;
+				// actualizamos el last
+				last = current.next;
+			}
+			count--;
 		}
 		
-		
-		
-		// Guardar el elemento a eliminar
-		aux = last.data;
-		/* TODO
-		// Si solo hay un elemento
-		if (this.size() == 1) {
-			
-			last = null;
-			count = 0;
-			return aux;
-		} 
-		
-		// Si hay más elementos
-		last.next = last.next.next;
-		
-		count--;
-		*/
-		return aux;
+		return data;
 	}
 
 
@@ -107,7 +113,7 @@ public class CircularLinkedList<T> implements ListADT<T> {
 		T data = null;
 		boolean encontrado = false;
 		
-		// Si es vacio
+		// Si no es vacio
 		if (!isEmpty()) {
 			// Recorrer elementos
 			do {

@@ -9,7 +9,7 @@ public class UnorderedCircularLinkedList<T> extends CircularLinkedList<T> implem
 	 */
 	public void addToFront(T elem) {
 	// añade un elemento al comienzo
-		Node<T> newNodo = new Node(elem);
+		Node<T> newNodo = new Node<T>(elem);
 
 		if(isEmpty()){
 			last = newNodo;
