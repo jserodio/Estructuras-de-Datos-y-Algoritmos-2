@@ -7,7 +7,7 @@ import packCodigo.SinglePeliculas;
 
 public class GraphHash {
 
-	HashMap<String, ArrayList<String>> g;
+	public HashMap<String, ArrayList<String>> g;
 
 	/**
 	 * Crea el grafo desde la lista de peliculas
