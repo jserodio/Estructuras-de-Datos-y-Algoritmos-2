@@ -11,7 +11,7 @@ public class GraphHash {
 
 	/**
 	 * Crea el grafo desde la lista de peliculas
-	 * Los nodos son nombres de acotres y titulos de peliculas
+	 * Los nodos son nombres de actores y titulos de peliculas
 	 * @param lPeliculas
 	 */
 	public void crearGrafo (SinglePeliculas lPeliculas) {
@@ -19,7 +19,7 @@ public class GraphHash {
 	}
 	
 	/**
-	 * Siendo p1 y p2 titulos de peliculas, el resultado será
+	 * Siendo p1 y p2 titulos de peliculas o actores, el resultado será
 	 * TRUE si hay una cadena de relaciones que une a p1 y p2.
 	 * 
 	 * @param p1
