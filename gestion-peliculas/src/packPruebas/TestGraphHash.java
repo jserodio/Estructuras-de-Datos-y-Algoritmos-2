@@ -14,7 +14,7 @@ public class TestGraphHash {
 
 	@Test
 	public void testCrearGrafo() {
-		SinglePeliculas.getSingle().cargarDatos("ficheros/casoVacio.txt");
+		SinglePeliculas.getSingle().cargarDatos("casoVacio.txt");
 		
 		GraphHash grafo = new GraphHash();
 		
@@ -136,19 +136,19 @@ public class TestGraphHash {
 		
 		grafo.crearGrafo(SinglePeliculas.getSingle());
 		
-		assertTrue(grafo.g.get(p1).contains(a1.getNombre()));
-		assertTrue(grafo.g.get(p1).contains(a2.getNombre()));
-		assertTrue(grafo.g.get(p1).contains(a3.getNombre()));
-		assertTrue(grafo.g.get(a1).contains(p1.getNombre()));
-		assertTrue(grafo.g.get(a2).contains(p1.getNombre()));
-		assertTrue(grafo.g.get(a3).contains(p1.getNombre()));
+		assertTrue(grafo.g.get(p1.getNombre()).contains(a1.getNombre()));
+		assertTrue(grafo.g.get(p1.getNombre()).contains(a2.getNombre()));
+		assertTrue(grafo.g.get(p1.getNombre()).contains(a3.getNombre()));
+		assertTrue(grafo.g.get(a1.getNombre()).contains(p1.getNombre()));
+		assertTrue(grafo.g.get(a2.getNombre()).contains(p1.getNombre()));
+		assertTrue(grafo.g.get(a3.getNombre()).contains(p1.getNombre()));
 	}
 
 	@Test
 	public void testEstanConectadas() {
 		
 		// Caso grafo vacio
-		SinglePeliculas.getSingle().cargarDatos("ficheros/casoVacio.txt");
+		SinglePeliculas.getSingle().cargarDatos("casoVacio.txt");
 		GraphHash grafo = new GraphHash();
 		grafo.crearGrafo(SinglePeliculas.getSingle());
 		// Test
