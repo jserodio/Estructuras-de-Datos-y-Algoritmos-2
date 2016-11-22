@@ -1,20 +1,19 @@
 package packCodigo;
 import java.util.ArrayList;
-import java.util.Iterator;
-
-import packCircularLinkedList.UnorderedCircularLinkedList;
+//import java.util.Iterator;
+//import packCircularLinkedList.UnorderedCircularLinkedList;
 
 public class Pelicula {
 
 	private final String		nombre;
 	// private ArrayList<Actor>	listaActores;
-	private UnorderedCircularLinkedList<Actor>	listaActores;
+	private ArrayList<Actor>	listaActores;
 	private float				dinero;
 
 	public Pelicula(String p) {
 		this.nombre = p;
 		// this.listaActores = new ArrayList<Actor>();
-		this.listaActores = new UnorderedCircularLinkedList<Actor>();
+		this.listaActores = new ArrayList<Actor>();
 		this.dinero = 0;
 	}
 
@@ -27,22 +26,22 @@ public class Pelicula {
 	}
 	
 	public ArrayList<Actor> getListaActores() {
-		//return this.listaActores;
-		ArrayList<Actor> ret = new ArrayList<Actor>();
-		
-		Iterator<Actor> it = this.listaActores.iterator();
-		
-		while (it.hasNext()) {
-			Actor elem = (Actor) it.next();
-			ret.add(elem);
-		}
-		
-		return ret;
+		return this.listaActores;
+//		ArrayList<Actor> ret = new ArrayList<Actor>();
+//		
+//		Iterator<Actor> it = this.listaActores.iterator();
+//		
+//		while (it.hasNext()) {
+//			Actor elem = (Actor) it.next();
+//			ret.add(elem);
+//		}
+//		
+//		return ret;
 	}
 
 	public void insertarActor(Actor actor) {
-		//listaActores.add(actor);
-		listaActores.addToRear(actor);
+		listaActores.add(actor);
+		//listaActores.addToRear(actor);
 	}
 	
 	public void eliminarActor(Actor actor) {
@@ -54,17 +53,19 @@ public class Pelicula {
 	}
 	
 	public void imprimir() {
-		/*
+		
 		for (Actor actor : listaActores) {
 			System.out.println("-" + actor.getNombre());
 		}
-		*/
+		
+		/*
 		Iterator<Actor> it = this.listaActores.iterator();
 		
 		while (it.hasNext()) {
 			Actor elem = (Actor) it.next();
 			System.out.println("-" + elem.getNombre());
 		}
+		*/
 		System.out.print("\nSe han obtenido: " + listaActores.size() + " actores.\n\n");
 	}
 
