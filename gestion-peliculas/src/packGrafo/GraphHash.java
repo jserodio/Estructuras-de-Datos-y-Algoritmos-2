@@ -64,6 +64,10 @@ public class GraphHash {
 	 * Siendo p1 y p2 titulos de peliculas o actores, el resultado será
 	 * TRUE si hay una cadena de relaciones que une a p1 y p2.
 	 * Precondicion: p1 y p2 son diferentes.
+	 * Coste:	Caso peor o(N)
+	 * 			Caso medio o(N/2)
+	 * 			Caso mejor o(1)
+	 * Donde N es el número de actores y películas.
 	 * 
 	 * @param p1
 	 * @param p2
@@ -98,7 +102,7 @@ public class GraphHash {
 			boolean encontrado = actual.equals(p2);
 			// mientras el elemento no sea el buscado
 			// y la cola de búsqueda tenga al menos un elemento
-			while ( (encontrado == false) && (actual != null)) {
+			while ((encontrado == false) && (actual != null)) {
 				// nos aseguramos de no dar vueltas infinitas
 				// en caso de haber examinado un elemento varias veces
 				if (!elemExaminados.contains(actual)) {
