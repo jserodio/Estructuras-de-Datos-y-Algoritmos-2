@@ -211,7 +211,7 @@ public class TestGraphHash {
 		// Test
 		assertTrue(grafo.estanConectadas(p2.getNombre(), a2.getNombre()));
 		// Test
-		assertTrue(grafo.estanConectadas(p3.getNombre(), a1.getNombre()));
+		assertFalse(grafo.estanConectadas(p3.getNombre(), a1.getNombre()));
 	}
 
 }
