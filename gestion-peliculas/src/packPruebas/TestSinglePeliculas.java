@@ -9,7 +9,7 @@ public class TestSinglePeliculas {
 
 	@org.junit.Test
 	public void testCargarDatos() {
-		SinglePeliculas.getSingle().cargarDatos("ficheros/casoVacio.txt");
+		SinglePeliculas.getSingle().cargarDatos("casoVacio.txt");
 		// resultados
 		int esperado = 0;
 		int obtenido = SinglePeliculas.getSingle().getLista().size();
@@ -23,7 +23,7 @@ public class TestSinglePeliculas {
 	
 	@org.junit.Test
 	public void testCargarDatosCasoA() {
-		SinglePeliculas.getSingle().cargarDatos("ficheros/casoA.txt");
+		SinglePeliculas.getSingle().cargarDatos("casoA.txt");
 		// resultados
 		int esperado = 1;
 		int obtenido = SinglePeliculas.getSingle().getLista().size();
@@ -42,7 +42,7 @@ public class TestSinglePeliculas {
 		SingleActores.getSingle().vaciarLista();
 		SinglePeliculas.getSingle().vaciarLista();
 		
-		SinglePeliculas.getSingle().cargarDatos("ficheros/casoB.txt");
+		SinglePeliculas.getSingle().cargarDatos("casoB.txt");
 		// resultados
 		int esperado = 3; // 3 peliculas nuevas
 		int obtenido = SinglePeliculas.getSingle().getLista().size();

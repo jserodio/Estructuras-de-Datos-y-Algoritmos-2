@@ -18,7 +18,7 @@ public class TestSingleActores {
 		assertFalse(obtenido >= 0);
 		
 		// Cargando la lista
-		SinglePeliculas.getSingle().cargarDatos("ficheros/casoA.txt");
+		SinglePeliculas.getSingle().cargarDatos("casoA.txt");
 		
 		obtenido = SingleActores.getSingle().buscarActor(new Actor("Actor 1"));
 		// tiene que dar true si encuentra el actor
@@ -48,7 +48,7 @@ public class TestSingleActores {
 		assertEquals(esperado, obtenido);
 		
 		// Cargando la lista
-		SinglePeliculas.getSingle().cargarDatos("ficheros/casoA.txt");
+		SinglePeliculas.getSingle().cargarDatos("casoA.txt");
 		
 		esperado = true;
 		obtenido = SingleActores.getSingle().estaActor(new Actor("Actor 1"));
@@ -77,7 +77,7 @@ public class TestSingleActores {
 		assertEquals(esperado, obtenido);
 		
 		// Cargando lista
-		SinglePeliculas.getSingle().cargarDatos("ficheros/casoA.txt");
+		SinglePeliculas.getSingle().cargarDatos("casoA.txt");
 		
 		esperado = new Actor("Actor 3");
 		obtenido = SingleActores.getSingle().eliminarActor(new Actor("Actor 3"));
