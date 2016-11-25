@@ -2,12 +2,10 @@ package packGrafo;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Queue;
 import java.util.stream.Collectors;
-
 import packCodigo.Actor;
 import packCodigo.Pelicula;
 import packCodigo.SinglePeliculas;
