@@ -323,7 +323,7 @@ public class Main {
 				break;
 			case "crear grafo":
 				grafoCreado = true;
-				System.out.println("Creando el grafo.");
+				System.out.println("Creando el grafo.\n");
 				timer = new Stopwatch();
 				grafo = new GraphHash();
 				grafo.crearGrafo(SinglePeliculas.getSingle());
@@ -339,9 +339,9 @@ public class Main {
 					System.out.println("Escriba el nombre del segundo elemento.");
 					System.out.print("> ");
 					String p2 = in.nextLine();
-					System.out.println("Buscando sus conexiones... espere por favor...");
+					System.out.println("Buscando sus conexiones... espere por favor...\n");
 					timer = new Stopwatch();
-					System.out.println(grafo.estanConectadas(p1, p2) ? "Si," : "No" + " están conectados.");
+					System.out.print(grafo.estanConectadas(p1, p2) ? "Si," : "No"); System.out.println(" están conectados.");
 					System.out.println(timer.elapsedTime() + " segundos.\n");
 				} else {
 					System.out.println("Debe crear primero el grafo.\n");
