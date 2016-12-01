@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import packGrafo.GraphHash;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -17,6 +19,8 @@ public class Main {
 		String nPelicula;
 		String respuesta;
 		String ruta;
+		boolean grafoCreado = false;
+		GraphHash grafo = null;
 		boolean correcto;
 		
 		// mientras elegido != salir no se cerrara el programa
@@ -38,6 +42,8 @@ public class Main {
 			System.out.println(" incrementar dinero");
 			System.out.println(" guardar");
 			System.out.println(" reiniciar");
+			System.out.println(" crear grafo");
+			System.out.println(" estan conectados");
 			System.out.println(" salir");
 			System.out.print("> ");
 			elegido = in.nextLine();
@@ -313,6 +319,32 @@ public class Main {
 				if (respuesta.equalsIgnoreCase("si")) {
 					SingleActores.getSingle().vaciarLista();
 					SinglePeliculas.getSingle().vaciarLista();
+				}
+				break;
+			case "crear grafo":
+				grafoCreado = true;
+				System.out.println("Creando el grafo.\n");
+				timer = new Stopwatch();
+				grafo = new GraphHash();
+				grafo.crearGrafo(SinglePeliculas.getSingle());
+				System.out.println("El grafo ha sido creado.");
+				System.out.println(timer.elapsedTime() + " segundos.\n");
+				//grafo.print();
+				break;
+			case "estan conectados":
+				if (grafoCreado) {
+					System.out.println("Escriba el nombre del primer elemento.");
+					System.out.print("> ");
+					String p1 = in.nextLine();
+					System.out.println("Escriba el nombre del segundo elemento.");
+					System.out.print("> ");
+					String p2 = in.nextLine();
+					System.out.println("Buscando sus conexiones... espere por favor...\n");
+					timer = new Stopwatch();
+					System.out.print(grafo.estanConectadas(p1, p2) ? "Si," : "No"); System.out.println(" están conectados.");
+					System.out.println(timer.elapsedTime() + " segundos.\n");
+				} else {
+					System.out.println("Debe crear primero el grafo.\n");
 				}
 				break;
 			case "salir":
