@@ -255,8 +255,7 @@ public class TestGraphHash {
 		
 		maxA = listaActores.size()-1;
 		maxP = listaPeliculas.size()-1;
-		
-		
+			
 		timer = new Stopwatch();
 		cuenta = 0;
 		// 10 seconds
@@ -279,6 +278,30 @@ public class TestGraphHash {
 			cuenta++;
 		}
 		System.out.println("Se ha llamado a estanConectadas en 1 minuto: " + cuenta + " veces.");
+		System.out.println(timer.elapsedTime() + " segundos.\n");
+		
+		timer = new Stopwatch();
+		cuenta = 0;
+		// 10 minutes
+		while (timer.elapsedTime()<600) {
+			p1 = listaActores.get(randomIndex.nextInt(maxA) + min);
+			p2 = listaPeliculas.get(randomIndex.nextInt(maxP) + min);
+			grafo.estanConectadas(p1, p2);
+			cuenta++;
+		}
+		System.out.println("Se ha llamado a estanConectadas en 10 minutos: " + cuenta + " veces.");
+		System.out.println(timer.elapsedTime() + " segundos.\n");
+		
+		timer = new Stopwatch();
+		cuenta = 0;
+		// 30 minutes
+		while (timer.elapsedTime()<1800) {
+			p1 = listaActores.get(randomIndex.nextInt(maxA) + min);
+			p2 = listaPeliculas.get(randomIndex.nextInt(maxP) + min);
+			grafo.estanConectadas(p1, p2);
+			cuenta++;
+		}
+		System.out.println("Se ha llamado a estanConectadas en 30 minutos: " + cuenta + " veces.");
 		System.out.println(timer.elapsedTime() + " segundos.\n");
 		
 		timer = new Stopwatch();
