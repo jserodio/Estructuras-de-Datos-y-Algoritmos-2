@@ -316,4 +316,42 @@ public class TestGraphHash {
 		System.out.println("Se ha llamado a estanConectadas en 1 hora: " + cuenta + " veces.");
 		System.out.println(timer.elapsedTime() + " segundos.\n");
 	}
+	
+	@Test
+	public void testPageRank() {	
+		
+		// Caso grafo vacio
+		SinglePeliculas.getSingle().cargarDatos("casoVacio.txt");
+		GraphHash grafo = new GraphHash();
+		grafo.crearGrafo(SinglePeliculas.getSingle());
+		// Test
+		assertTrue(grafo.pageRank().isEmpty());
+		
+		// Caso grafo con 1 pelicula y sin actores
+		Pelicula p1 = new Pelicula("p1");
+		SinglePeliculas.getSingle().insertarPelicula(p1);
+		grafo.crearGrafo(SinglePeliculas.getSingle());
+		// Test
+		assertTrue(grafo.pageRank().isEmpty());
+		
+		// Caso grafo con una peli y un actor relacionados
+		Actor a1 = new Actor("a1");
+		p1.insertarActor(a1);
+		a1.insertarPelicula(p1);
+		SinglePeliculas.getSingle().vaciarLista();
+		SinglePeliculas.getSingle().insertarPelicula(p1);
+		SingleActores.getSingle().insertarActor(a1);
+		grafo.crearGrafo(SinglePeliculas.getSingle());
+		// Test
+		assertTrue(grafo.pageRank().size() == 1);
+		assertTrue(grafo.pageRank().get("a1") == 0.5);
+		
+		// Caso grafo con 1 actor y sin peliculas 
+		/*Actor a1 = new Actor("a1");
+		SinglePeliculas.getSingle().insertarPelicula(p1);
+		grafo.crearGrafo(SinglePeliculas.getSingle());
+		// Test
+		assertTrue(grafo.pageRank().isEmpty());*/
+	}
+	
 }

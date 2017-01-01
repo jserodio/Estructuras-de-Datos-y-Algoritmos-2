@@ -117,6 +117,22 @@ public class GraphHash {
 			return encontrado;
 		}
 	}
+	
+	/**
+	 * El algoritmo PageRank calcula la probabilidad de que una persona, accediendo al grafo
+	 * y siguiendo enlaces, llegue a un nodo en particular. El cálculo de PageRank requiere
+	 * varios pases, llamados iteraciones, para ajustar el valor aproximado.
+	 * 
+	 * Coste: 
+	 * Donde
+	 * 
+	 * @return HashMap<String, Double> devuelve un mapa de actores con su PageRank asociado.
+	 */
+	public HashMap<String, Double> pageRank() {
+		HashMap<String, Double> h = new HashMap<String, Double>();
+		
+		return h;
+	}
 
 	/**
 	 * Imprimir
