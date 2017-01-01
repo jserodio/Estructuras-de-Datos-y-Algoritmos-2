@@ -346,12 +346,44 @@ public class TestGraphHash {
 		assertTrue(grafo.pageRank().size() == 1);
 		assertTrue(grafo.pageRank().get("a1") == 0.5);
 		
-		// Caso grafo con 1 actor y sin peliculas 
-		/*Actor a1 = new Actor("a1");
-		SinglePeliculas.getSingle().insertarPelicula(p1);
+		// Caso grafo con 1 actor y sin peliculas
+		SinglePeliculas.getSingle().vaciarLista();
+		SingleActores.getSingle().vaciarLista();
+		a1 = new Actor("a1");
+		SingleActores.getSingle().insertarActor(a1);
 		grafo.crearGrafo(SinglePeliculas.getSingle());
 		// Test
-		assertTrue(grafo.pageRank().isEmpty());*/
+		assertTrue(grafo.pageRank().isEmpty());
+		
+		// Caso grafo con una peli y un actor SIN relacion
+		/*
+		SinglePeliculas.getSingle().vaciarLista();
+		SingleActores.getSingle().vaciarLista();
+		a1 = new Actor("a1");
+		p1 = new Pelicula("p1");
+		SinglePeliculas.getSingle().insertarPelicula(p1);
+		SingleActores.getSingle().insertarActor(a1);
+		grafo.crearGrafo(SinglePeliculas.getSingle());
+		// Test
+		assertTrue(grafo.pageRank().size() == 1);
+		assertTrue(grafo.pageRank().get("a1") == 0.5);
+		*/
+		
+		//Caso A B C D relacionados
+		SinglePeliculas.getSingle().vaciarLista();
+		SingleActores.getSingle().vaciarLista();
+		Actor a = new Actor("A");
+		Pelicula b = new Pelicula("B");
+		Pelicula c = new Pelicula("C");
+		Pelicula d = new Pelicula("D");
+		a.insertarPelicula(b);
+		a.insertarPelicula(c);
+		a.insertarPelicula(d);
+		b.insertarActor(a);
+		c.insertarActor(a);
+		d.insertarActor(a);
+		
+		
 	}
 	
 }
