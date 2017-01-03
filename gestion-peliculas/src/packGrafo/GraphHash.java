@@ -35,7 +35,7 @@ public class GraphHash {
 			ArrayList<String> nombresPelis = null;
 
 			for (Pelicula p : lPeliculas.getLista()) // Coste M (numero de pelis
-			// totales) añadido
+				// totales) añadido
 			{ // Por cada pelicula
 				// Si pelicula no esta en el grafo
 				if (g.get(p.getNombre()) == null) {
@@ -206,37 +206,46 @@ public class GraphHash {
 				return null;
 		}
 	}
-	
+
 	/**
-	 * El algoritmo PageRank calcula la probabilidad de que una persona, accediendo al grafo
-	 * y siguiendo enlaces, llegue a un nodo en particular. El cálculo de PageRank requiere
-	 * varios pases, llamados iteraciones, para ajustar el valor aproximado.
-	 * 
-	 * Coste: 
-	 * Donde
-	 * 
-	 * @return HashMap<String, Double> devuelve un mapa de actores con su PageRank asociado.
+	 * El algoritmo PageRank calcula la probabilidad de que una persona,
+	 * accediendo al grafo y siguiendo enlaces, llegue a un nodo en particular.
+	 * El cálculo de PageRank requiere varios pases, llamados iteraciones, para
+	 * ajustar el valor aproximado.
+	 *
+	 * Coste: Donde
+	 *
+	 * @return HashMap<String, Double> devuelve un mapa de actores con su
+	 *         PageRank asociado.
 	 */
 	public HashMap<String, Double> pageRank() {
 		final double DAMPINGFACTOR = 0.85F;
 		HashMap<String, Double> h = new HashMap<String, Double>();
-		
 		Double sizeG = (double) g.size();
-		
 		// primera interacion
 		for (String key : g.keySet()) {
-			h.put(key, (1.0/sizeG));
+			h.put(key, 1.0 / sizeG);
 		}
-		
+
 		// Primera vuelta A, luego B, Luego C y luego D.
 		for (Entry<String, ArrayList<String>> item : g.entrySet()) {
 			do {
 				// Que nodos apuntan a A?
-				SUMATORIO...
-				h.replace(item.getKey(), ((1-DAMPINGFACTOR)/h.size())+DAMPINGFACTOR POR SUMATORIO...   );
-			} while ( absoluto(actual - anterior) >= 0.0001F );
+				// creo un array con los relacionados
+				ArrayList<String> aux = new ArrayList<String>(g.get(item
+						.getKey()));
+				// para acumular el sumatorio
+				Double Sumatorio = 0.0;
+				for (String i : aux) {
+					// añade a lo ya sumado la division del page rank entre la
+					// cantidad de relazionados
+					Sumatorio = Sumatorio + h.get(i) / g.get(i).size();
+				}
+				h.replace(item.getKey(), (1 - DAMPINGFACTOR) / h.size()
+						+ DAMPINGFACTOR * Sumatorio);
+			} while (GraphHash.absoluto(actual - anterior) >= 0.0001F);
 		}
-		
+
 		return h;
 	}
 
@@ -253,8 +262,8 @@ public class GraphHash {
 			System.out.println();
 		}
 	}
-	
+
 	private static double absoluto(double a) {
-        return (a <= 0.0F) ? 0.0F - a : a;
-    }
+		return a <= 0.0F ? 0.0F - a : a;
+	}
 }
