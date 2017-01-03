@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map.Entry;
 import java.util.Queue;
 import java.util.Stack;
 import java.util.stream.Collectors;
@@ -205,6 +206,39 @@ public class GraphHash {
 				return null;
 		}
 	}
+	
+	/**
+	 * El algoritmo PageRank calcula la probabilidad de que una persona, accediendo al grafo
+	 * y siguiendo enlaces, llegue a un nodo en particular. El cálculo de PageRank requiere
+	 * varios pases, llamados iteraciones, para ajustar el valor aproximado.
+	 * 
+	 * Coste: 
+	 * Donde
+	 * 
+	 * @return HashMap<String, Double> devuelve un mapa de actores con su PageRank asociado.
+	 */
+	public HashMap<String, Double> pageRank() {
+		final double DAMPINGFACTOR = 0.85F;
+		HashMap<String, Double> h = new HashMap<String, Double>();
+		
+		Double sizeG = (double) g.size();
+		
+		// primera interacion
+		for (String key : g.keySet()) {
+			h.put(key, (1.0/sizeG));
+		}
+		
+		// Primera vuelta A, luego B, Luego C y luego D.
+		for (Entry<String, ArrayList<String>> item : g.entrySet()) {
+			do {
+				// Que nodos apuntan a A?
+				SUMATORIO...
+				h.replace(item.getKey(), ((1-DAMPINGFACTOR)/h.size())+DAMPINGFACTOR POR SUMATORIO...   );
+			} while ( absoluto(actual - anterior) >= 0.0001F );
+		}
+		
+		return h;
+	}
 
 	/**
 	 * Imprimir
@@ -219,4 +253,8 @@ public class GraphHash {
 			System.out.println();
 		}
 	}
+	
+	private static double absoluto(double a) {
+        return (a <= 0.0F) ? 0.0F - a : a;
+    }
 }
