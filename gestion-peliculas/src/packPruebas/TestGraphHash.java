@@ -2,12 +2,17 @@ package packPruebas;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
+
 import org.junit.Test;
 
 import packCodigo.Actor;
 import packCodigo.Pelicula;
 import packCodigo.SingleActores;
 import packCodigo.SinglePeliculas;
+import packCodigo.Stopwatch;
 import packGrafo.GraphHash;
 
 public class TestGraphHash {
@@ -214,4 +219,101 @@ public class TestGraphHash {
 		assertFalse(grafo.estanConectadas(p3.getNombre(), a1.getNombre()));
 	}
 
+	@Test
+	public void testTimeEstanConectadas() {
+		Stopwatch timer = null;
+		GraphHash grafo = null;
+		List<String> listaActores = null;
+		List<String> listaPeliculas = null;
+		Random randomIndex = new Random();
+		int min = 0;
+		int maxA;
+		int maxP;
+		int cuenta;
+		String p1;
+		String p2;
+		
+		System.out.println("\nCargando archivo, espere por favor.");
+		timer = new Stopwatch();
+		SinglePeliculas.getSingle().cargarDatos("FilmsActors20162017.txt");			
+		System.out.println("El archivo ha sido cargado.");
+		System.out.println(timer.elapsedTime() + " segundos.\n");
+		
+		System.out.println("Creando grafo, espere por favor.");
+		timer = new Stopwatch();
+		grafo = new GraphHash();
+		grafo.crearGrafo(SinglePeliculas.getSingle());
+		System.out.println("El grafo ha sido creado.");
+		System.out.println(timer.elapsedTime() + " segundos.\n");
+		
+		listaActores = SingleActores.getSingle().getLista().stream()
+			.map(a -> a.getNombre())
+				.collect(Collectors.toList());
+		listaPeliculas = SinglePeliculas.getSingle().getLista().stream()
+			.map(p -> p.getNombre())
+				.collect(Collectors.toList());
+		
+		maxA = listaActores.size()-1;
+		maxP = listaPeliculas.size()-1;
+			
+		timer = new Stopwatch();
+		cuenta = 0;
+		// 10 seconds
+		while (timer.elapsedTime()<10) {
+			p1 = listaActores.get(randomIndex.nextInt(maxA) + min);
+			p2 = listaPeliculas.get(randomIndex.nextInt(maxP) + min);
+			grafo.estanConectadas(p1, p2);
+			cuenta++;
+		}
+		System.out.println("Se ha llamado a estanConectadas en 10 segundos: " + cuenta + " veces.");
+		System.out.println(timer.elapsedTime() + " segundos.\n");
+		
+		timer = new Stopwatch();
+		cuenta = 0;
+		// 1 minute
+		while (timer.elapsedTime()<60) {
+			p1 = listaActores.get(randomIndex.nextInt(maxA) + min);
+			p2 = listaPeliculas.get(randomIndex.nextInt(maxP) + min);
+			grafo.estanConectadas(p1, p2);
+			cuenta++;
+		}
+		System.out.println("Se ha llamado a estanConectadas en 1 minuto: " + cuenta + " veces.");
+		System.out.println(timer.elapsedTime() + " segundos.\n");
+		
+		timer = new Stopwatch();
+		cuenta = 0;
+		// 10 minutes
+		while (timer.elapsedTime()<600) {
+			p1 = listaActores.get(randomIndex.nextInt(maxA) + min);
+			p2 = listaPeliculas.get(randomIndex.nextInt(maxP) + min);
+			grafo.estanConectadas(p1, p2);
+			cuenta++;
+		}
+		System.out.println("Se ha llamado a estanConectadas en 10 minutos: " + cuenta + " veces.");
+		System.out.println(timer.elapsedTime() + " segundos.\n");
+		
+		timer = new Stopwatch();
+		cuenta = 0;
+		// 30 minutes
+		while (timer.elapsedTime()<1800) {
+			p1 = listaActores.get(randomIndex.nextInt(maxA) + min);
+			p2 = listaPeliculas.get(randomIndex.nextInt(maxP) + min);
+			grafo.estanConectadas(p1, p2);
+			cuenta++;
+		}
+		System.out.println("Se ha llamado a estanConectadas en 30 minutos: " + cuenta + " veces.");
+		System.out.println(timer.elapsedTime() + " segundos.\n");
+		
+		timer = new Stopwatch();
+		cuenta = 0;
+		// 60 minutes
+		while (timer.elapsedTime()<3600) {
+			p1 = listaActores.get(randomIndex.nextInt(maxA) + min);
+			p2 = listaPeliculas.get(randomIndex.nextInt(maxP) + min);
+			grafo.estanConectadas(p1, p2);
+			cuenta++;
+		}
+		System.out.println("Se ha llamado a estanConectadas en 1 hora: " + cuenta + " veces.");
+		System.out.println(timer.elapsedTime() + " segundos.\n");
+	}
 }
