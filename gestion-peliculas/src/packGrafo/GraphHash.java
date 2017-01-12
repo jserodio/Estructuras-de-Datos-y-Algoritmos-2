@@ -18,7 +18,7 @@ import packCodigo.SinglePeliculas;
 public class GraphHash {
 
 	public HashMap<String, ArrayList<String>>	g;
-	public HashMap<String, ArrayList<String>>	h;
+	public HashMap<String, Double>				h;
 
 	/**
 	 * Crea el grafo desde la lista de peliculas Los nodos son nombres de
@@ -37,7 +37,7 @@ public class GraphHash {
 			ArrayList<String> nombresPelis = null;
 
 			for (Pelicula p : lPeliculas.getLista()) // Coste M (numero de pelis
-			// totales) añadido
+				// totales) añadido
 			{ // Por cada pelicula
 				// Si pelicula no esta en el grafo
 				if (g.get(p.getNombre()) == null) {
@@ -229,7 +229,7 @@ public class GraphHash {
 	 */
 	public HashMap<String, Double> pageRank() {
 		final double DAMPINGFACTOR = 0.85F;
-		HashMap<String, Double> h = new HashMap<String, Double>();
+		h.clear();
 		Double sizeG = (double) g.size();
 		// primera interacion
 		for (String key : g.keySet()) {
@@ -254,6 +254,7 @@ public class GraphHash {
 				}
 				h.replace(item.getKey(), (1 - DAMPINGFACTOR) / h.size()
 						+ DAMPINGFACTOR * Sumatorio);
+				actual = 0.0;
 				for (Double sum : h.values()) {
 					actual += sum;
 				}
