@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Queue;
 import java.util.Stack;
@@ -17,6 +18,7 @@ import packCodigo.SinglePeliculas;
 public class GraphHash {
 
 	public HashMap<String, ArrayList<String>>	g;
+	public HashMap<String, ArrayList<String>>	h;
 
 	/**
 	 * Crea el grafo desde la lista de peliculas Los nodos son nombres de
@@ -35,7 +37,7 @@ public class GraphHash {
 			ArrayList<String> nombresPelis = null;
 
 			for (Pelicula p : lPeliculas.getLista()) // Coste M (numero de pelis
-				// totales) añadido
+			// totales) añadido
 			{ // Por cada pelicula
 				// Si pelicula no esta en el grafo
 				if (g.get(p.getNombre()) == null) {
@@ -207,6 +209,13 @@ public class GraphHash {
 		}
 	}
 
+	public void imrimirOrdenado() {
+		for (Map.Entry entry : h.entrySet()) {
+			System.out.println("Clave : " + entry.getKey() + " Valor : "
+					+ entry.getValue());
+		}
+	}
+
 	/**
 	 * El algoritmo PageRank calcula la probabilidad de que una persona,
 	 * accediendo al grafo y siguiendo enlaces, llegue a un nodo en particular.
@@ -226,10 +235,12 @@ public class GraphHash {
 		for (String key : g.keySet()) {
 			h.put(key, 1.0 / sizeG);
 		}
-
+		double actual = 1.0 / sizeG;
 		// Primera vuelta A, luego B, Luego C y luego D.
 		for (Entry<String, ArrayList<String>> item : g.entrySet()) {
+			double anterior;
 			do {
+				anterior = actual;
 				// Que nodos apuntan a A?
 				// creo un array con los relacionados
 				ArrayList<String> aux = new ArrayList<String>(g.get(item
@@ -243,6 +254,10 @@ public class GraphHash {
 				}
 				h.replace(item.getKey(), (1 - DAMPINGFACTOR) / h.size()
 						+ DAMPINGFACTOR * Sumatorio);
+				for (Double sum : h.values()) {
+					actual += sum;
+				}
+
 			} while (GraphHash.absoluto(actual - anterior) >= 0.0001F);
 		}
 
