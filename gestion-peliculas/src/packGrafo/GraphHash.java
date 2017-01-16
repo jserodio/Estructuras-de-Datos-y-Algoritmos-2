@@ -37,7 +37,7 @@ public class GraphHash {
 			ArrayList<String> nombresPelis = null;
 
 			for (Pelicula p : lPeliculas.getLista()) // Coste M (numero de pelis
-				// totales) añadido
+			// totales) añadido
 			{ // Por cada pelicula
 				// Si pelicula no esta en el grafo
 				if (g.get(p.getNombre()) == null) {
@@ -209,7 +209,7 @@ public class GraphHash {
 		}
 	}
 
-	public void imrimirOrdenado() {
+	public void imprimirOrdenado() {
 		for (Map.Entry entry : h.entrySet()) {
 			System.out.println("Clave : " + entry.getKey() + " Valor : "
 					+ entry.getValue());
